@@ -89,7 +89,7 @@ class CustomerGroup extends \Controller\Core\Admin
             if (!$id) {
                 throw new \Exception("Invalid Id.");
             }
-            $customerGroup = \Mage::getController('Model\CustomerGroup');
+            $customerGroup = \Mage::getController('Model\Customer\CustomerGroup');
             if ($customerGroup->delete($id)) {
                 $message = \Mage::getModel('Model\Admin\Message');
                 $message->setSuccess('Record Deleted Successfully...');
@@ -104,5 +104,22 @@ class CustomerGroup extends \Controller\Core\Admin
             $message->setFailure($e->getMessage());
             $this->redirect('gridHtml', null, null, true);
         }
+    }
+    public function statusAction()
+    {
+        $status = \Mage::getModel('Model\Customer\CustomerGroup');
+        if ($id = $this->getRequest()->getGet('id')) {
+            $row = $status->load($id);
+            if ($row->status == '0') {
+                $status->status = '1';
+                $status->groupId = $id;
+                $status->save();
+            } else {
+                $status->status = '0';
+                $status->groupId = $id;
+                $status->save();
+            }
+        }
+        $this->redirect('gridHtml', null, [], true);
     }
 }

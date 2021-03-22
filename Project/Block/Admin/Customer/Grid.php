@@ -1,45 +1,129 @@
 <?php
 namespace Block\Admin\Customer;
-\Mage::loadFileByClassName('Block\Core\Template');
+
+\Mage::loadFileByClassName('Block\Core\Grid');
 /**
- * 
+ *
  */
-class Grid extends \Block\Core\Template
+class Grid extends \Block\Core\Grid
 {
-	protected $customers;
+    public function __construct()
+    {
+        parent::__construct();
+        $this->prepareStatus();
+    }
+    public function prepareCollection()
+    {
+        $customer = \Mage::getModel('Model\Customer');
+        $query = "SELECT
+							c.`customerId`,
+							c.`firstName`,
+							c.`lastName`,
+							c.`email`,
+							c.`mobile`,
+							c.`password`,
+							c.`status`,
+							cg.`name`
+						FROM `customer` AS c , `customer_group` AS cg
+						WHERE c.`groupId` = cg.`groupId`";
+        $rows = $customer->all($query);
+        $this->setCollection($rows);
+        return $this;
 
-	public function __construct(){
-		parent::__construct();
-		$this->setTemplate('Admin/customer/gridcustomer.php');
-	}
-	protected function setCustomers($customers = NULL){
-		if ($this->customers) {
-			$this->customers = $customers;
-		}
-		if (!$customers) {
-			$customer = \Mage::getModel('Model\Customer');
-			$query = "SELECT
-								c.`customerId`,
-								c.`firstName`,
-								c.`lastName`,
-								c.`email`, 
-								c.`mobile`, 
-								c.`password`, 
-								c.`status`, 
-								cg.`name` 
-							FROM `customer` AS c , `customer_group` AS cg 
-							WHERE c.`groupId` = cg.`groupId`";
-			$rows = $customer->all($query);
-			$this->customers= $rows;
-		}
-		return $this;
-	}
-	public function getCustomers(){
-		if (!$this->customers) {
-			$this->setCustomers();
-		}
-		return $this->customers;
-	}
+    }
+    public function getTitle()
+    {
+        return "Customer";
+    }
+    public function prepareColumns()
+    {
+        $this->addColumn('customerId', [
+            'field' => 'customerId',
+            'label' => '#',
+            'type' => 'int',
+        ]);
+        $this->addColumn('firstName', [
+            'field' => 'firstName',
+            'label' => 'First Name',
+            'type' => 'varchar',
+        ]);
+        $this->addColumn('lastName', [
+            'field' => 'lastName',
+            'label' => 'Last Name',
+            'type' => 'varchar',
+        ]);
+        $this->addColumn('customerType', [
+            'field' => 'name',
+            'label' => 'Customer Type',
+            'type' => 'varchar',
+        ]);
+        $this->addColumn('email', [
+            'field' => 'email',
+            'label' => 'Email',
+            'type' => 'varchar',
+        ]);
+        $this->addColumn('mobile', [
+            'field' => 'mobile',
+            'label' => 'Mobile No.',
+            'type' => 'int',
+        ]);
+
+    }
+    public function prepareAction()
+    {
+        $this->addAction('edit', [
+            'method' => 'getEditUrl',
+            'label' => 'Edit',
+            'ajax' => true,
+            'class' => 'btn btn-warning',
+        ]);
+        $this->addAction('delete', [
+            'method' => 'getDeleteUrl',
+            'label' => 'Delete',
+            'ajax' => true,
+            'class' => 'btn btn-danger',
+        ]);
+    }
+
+    public function prepareButton()
+    {
+        $this->addButton('insert', [
+            'method' => 'getInsertUrl',
+            'label' => 'Add Customer',
+            'ajax' => true,
+            'class' => 'btn btn-primary',
+        ]);
+    }
+
+    public function getInsertUrl($ajax)
+    {
+        if (!$ajax) {
+            return "{$this->getUrl()->getUrl('edit', 'Admin_Customer', ['id' => $row->customerId])}";
+        }
+        return "object.setUrl('{$this->getUrl()->getUrl('form', 'Admin_Customer', [], true)}').resetParams().load()";
+    }
+
+    public function getStatusUrl($row, $ajax)
+    {
+        if (!$ajax) {
+            return "{$this->getUrl()->getUrl('status', 'Admin_Customer', ['id' => $row->customerId])}";
+        }
+        return "object.setUrl('{$this->getUrl()->getUrl('status', 'Admin_Customer', ['id' => $row->customerId])}').resetParams().load()";
+    }
+    public function getEditUrl($row, $ajax)
+    {
+        if (!$ajax) {
+            return "{$this->getUrl()->getUrl('edit', 'Admin_Customer', ['id' => $row->customerId])}";
+        }
+        return "object.setUrl('{$this->getUrl()->getUrl('form', 'Admin_Customer', ['id' => $row->customerId])}').resetParams().load()";
+    }
+
+    public function getDeleteUrl($row, $ajax)
+    {
+        if (!$ajax) {
+            return "{$this->getUrl()->getUrl('delete', 'Admin_Customer', ['id' => $row->customerId])}";
+        }
+        return "object.setUrl('{$this->getUrl()->getUrl('delete', 'Admin_Customer', ['id' => $row->customerId])}').resetParams().load()";
+    }
+
 }
-
-?>

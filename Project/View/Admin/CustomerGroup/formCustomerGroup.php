@@ -1,5 +1,6 @@
 <?php $customerGroup = $this->getTableRow();?>
-<?php //$customerGroup = $this->getCustomerGroup(); ?>
+<?php ?>
+<div class="container">
 <?php if ($this->getRequest()->getGet('id')): ?>
 <h1>Edit Custome Groupr</h1>
 <?php else: ?>
@@ -13,9 +14,15 @@
       <input type="text" class="form-control" placeholder="Customner Group Name" name="customerGroup[name]" required value="<?php echo $customerGroup->name; ?>">
     </div>
     <div class="form-group col-md-6">
-      <label for="inputPassword4">Default [0/1]</label>
-      <input type="text" class="form-control"  placeholder="Default [0/1]" name="customerGroup[default]" required value="<?php echo $customerGroup->default; ?>">
+      <label for="inputPassword4">Status</label>
+      <select class="custom-select" name="customerGroup[status]" required>
+    <option value="">--Select--</option>
+        <?php foreach ($customerGroup->getStatusOptions() as $key => $value): ?>
+          <option value="<?php echo $key ?>" <?php if ($customerGroup->status == $key): ?> selected <?php endif?>><?php echo $value; ?></option>
+        <?php endforeach?>
+ 	 </select>
     </div>
   </div>
     <button type="button" name="update" class="btn btn-primary" onclick="object.resetParams().setForm('#customerGroupForm').load();">Save</button>&nbsp;&nbsp;&nbsp;&nbsp;
 </form>
+</div>

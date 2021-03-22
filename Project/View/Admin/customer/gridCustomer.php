@@ -1,8 +1,8 @@
-<?php $customers = $this->getCustomers(); ?>
+<?php $customers = $this->getCustomers();?>
 <div class="container">
 	<h1>Customer</h1>
   <hr>
-	<a href="javascript:void(0);" onclick="object.setUrl('<?php echo $this->getUrl()->getUrl('form',NULL,[],true); ?>').resetParams().load();" class="btn btn-primary">Add Customer</a><br><br>
+	<a href="javascript:void(0);" onclick="object.setUrl('<?php echo $this->getUrl()->getUrl('form', null, [], true); ?>').resetParams().load();" class="btn btn-primary">Add Customer</a><br><br>
 </div>
 <div class="container">
 <table class="table">
@@ -19,8 +19,8 @@
     </tr>
   </thead>
   <tbody>
-    <?php if($customers) : ?>
-  		<?php foreach ($customers->data as $result) :?>
+    <?php if ($customers): ?>
+  		<?php foreach ($customers->data as $result): ?>
   			<tr>
       			<th scope='row'><?php echo $result->customerId; ?></th>
       			<td><?php echo $result->firstName; ?></td>
@@ -28,18 +28,18 @@
             <td><?php echo $result->name; ?></td>
     			  <td><?php echo $result->email; ?></td>
       			<td><?php echo $result->mobile; ?></td>
-            <?php if ($result->status == 0) : ?>
-            <td align="center"><a class="btn btn-success" href="javascript:void(0);" onclick="object.setUrl('<?php echo $this->getUrl()->getUrl('status','Admin_Customer',['id'=>$result->customerId]); ?>').resetParams().load();" >Enable</a></td>
-          <?php  else : ?>
-            <td align="center"><a class="btn btn-danger" href="javascript:void(0);" onclick="object.setUrl('<?php echo $this->getUrl()->getUrl('status','Admin_Customer',['id'=>$result->customerId]); ?>').resetParams().load();;" >Disable</a></td>
-          <?php endif ?>
-      			<td align="center"><a class="btn btn-warning" href="javascript:void(0)" onclick="object.setUrl('<?php echo $this->getUrl()->getUrl('form','Admin_Customer',['id'=>$result->customerId]); ?>').resetParams().load();">Edit</a></td>
-      			<td align="center"><a class="btn btn-danger" href="javascript:void(0);" onclick="object.setUrl('<?php echo $this->getUrl()->getUrl('delete','Admin_Customer',['id'=>$result->customerId]); ?>').resetParams().load();">Delete</a></td>
+            <?php if ($result->status == 0): ?>
+            <td align="center"><a class="btn btn-success" href="javascript:void(0);" onclick="object.setUrl('<?php echo $this->getUrl()->getUrl('status', 'Admin_Customer', ['id' => $result->customerId]); ?>').resetParams().load();" >Enable</a></td>
+          <?php else: ?>
+            <td align="center"><a class="btn btn-danger" href="javascript:void(0);" onclick="object.setUrl('<?php echo $this->getUrl()->getUrl('status', 'Admin_Customer', ['id' => $result->customerId]); ?>').resetParams().load();;" >Disable</a></td>
+          <?php endif?>
+      			<td align="center"><a class="btn btn-warning" href="javascript:void(0)" onclick="object.setUrl('<?php echo $this->getUrl()->getUrl('form', 'Admin_Customer', ['id' => $result->customerId]); ?>').resetParams().load();">Edit</a></td>
+      			<td align="center"><a class="btn btn-danger" href="javascript:void(0);" onclick="object.setUrl('<?php echo $this->getUrl()->getUrl('delete', 'Admin_Customer', ['id' => $result->customerId]); ?>').resetParams().load();">Delete</a></td>
          	</tr>
-  		<?php endforeach ?>
-    <?php else : ?>
+  		<?php endforeach?>
+    <?php else: ?>
       <tr><td colspan='9' align='center'><b>No Data For Customer...</b></td></tr>
-    <?php endif ?>
+    <?php endif?>
   </tbody>
 </table>
-</div> 
+</div>

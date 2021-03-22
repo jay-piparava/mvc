@@ -1,47 +1,77 @@
-<?php $products = $this->getProducts(); ?>
+<?php $rows = $this->getCollection();?>
+<?php $columns = $this->getColumns();?>
+<?php $actions = $this->getActions();?>
+<?php $status = $this->getStatus();?>
+<?php $buttons = $this->getButtons();?>
+
 <div class="container">
-	<h1>Product</h1>
-  <hr>
-	<a href="javascript:void(0)" onclick="object.setUrl('<?php echo $this->getUrl()->getUrl('form',NULL,[],true)?>').resetParams().load()" class="btn btn-primary">Add Product</a><br><br>	
+	<h1><?=$this->getTitle();?></h1>
+    <?php if ($buttons): ?>
+        <hr>
+        <?php foreach ($buttons as $kay => $button): ?>
+            <a class="<?=$button['class']?>" href="javascript:void(0)" onclick="<?=$this->getButtonUrl($button['method']);?>" ><?php echo $button['label'] ?></a>
+        <?php endforeach;?>
+    <?php endif;?>
+
 </div>
 <div class="container">
 <table class="table">
   <thead>
     <tr>
-      <th scope="col">#</th>
-      <th scope="col">Name</th>
-      <th scope="col">Price</th>
-      <th scope="col">Discount</th>
-      <th scope="col">Quantity</th>
-      <th scope="col">Discription</th>
-      <th scope="col">SKU</th>
-      <th scope="col">Status</th>
-      <th scope="col" align="center" colspan="2" style="text-align: center;">Action</th>
+      <?php foreach ($columns as $key => $column): ?>
+          <th scope="col"><?php echo $column['label'] ?></th>
+      <?php endforeach;?>
+
+	  <?php if ($status): ?>
+          <th scope="col">Status</th>
+      <?php endif?>
+      <?php if ($actions): ?>
+        <?php foreach ($actions as $key => $action): ?>
+          <th scope="col"><?php echo $action['label'] ?></th>
+        <?php endforeach;?>
+      <?php endif?>
     </tr>
   </thead>
   <tbody>
-  <?php if ($products) : ?>
-    <?php	foreach ($products->getData() as $result): ?>
-          <tr>
-              <th scope='row'><?php echo $result->productId ?></th>
-              <td><?php echo $result->name ?></td>
-              <td><?php echo $result->price ?></td>
-              <td><?php echo $result->discount ?></td>
-              <td><?php echo $result->quantity ?></td>
-              <td><?php echo $result->description ?></td>
-              <td><?php echo $result->sku ?></td>
-              <?php if ($result->status == 0) : ?>
-                <td align="center"><a class="btn btn-success" href="javascript:void(0)" onclick="object.setUrl('<?php echo $this->getUrl()->getUrl('status', 'Admin_Product', ['id' => $result->productId]) ?>').resetParams().load();">Enable</a></td>
-              <?php  else : ?>
-                <td align="center"><a class="btn btn-danger"href="javascript:void(0)" onclick="object.setUrl('<?php echo $this->getUrl()->getUrl('status', 'Admin_Product', ['id' => $result->productId]) ?>').resetParams().load();">Disable</a></td>
-              <?php endif ?>
-                <td align="center"><a class="btn btn-warning" href="javascript:void(0)" onclick="object.setUrl('<?php echo $this->getUrl()->getUrl('form', 'Admin_Product', ['id' => $result->productId],true) ?>').resetParams().load();">Edit</a></td>
-                <td align="center"><a class="btn btn-danger" href="javascript:void(0)" onclick="object.setUrl('<?php echo $this->getUrl()->getUrl('delete','Admin_Product',['id'=>$result->productId],true); ?>').resetParams().load();">Delete</a></td>	
-              </tr>
-    <?php endforeach ?>
-  <?php else : ?>
+  <?php if ($rows): ?>
+    <?php	foreach ($rows->getData() as $row): ?>
+    <tr>
+        <?php foreach ($columns as $kay => $column): ?>
+          <td><?php echo $this->getFieldValue($row, $column['field']) ?></td>
+        <?php endforeach;?>
+
+		<?php if ($status): ?>
+            <?php if ($status[0]['ajax']): ?>
+				<?php if ($row->status == '1'): ?>
+              <td><a class="<?php echo $status[0]['class']; ?>" href="javascript:void(0);" onClick="<?=$this->getMethodUrl($row, $status[0]['method'])?>"><?php echo $status[0]['label'] ?></a></td>
+			  <?php else: ?>
+				<td><a class="<?php echo $status[1]['class']; ?>" href="javascript:void(0);" onClick="<?=$this->getMethodUrl($row, $status[1]['method'])?>"><?php echo $status[1]['label'] ?></a></td>
+			  <?php endif;?>
+            <?php else: ?>
+              <td><a class="<?php echo $action['class']; ?>" href="<?=$this->getMethodUrl($row, $action['method'], false)?>"><?php echo $action['label'] ?></a></td>
+            <?php endif;?>
+
+        <?php endif;?>
+
+        <?php if ($actions): ?>
+          <?php foreach ($actions as $key => $action): ?>
+            <?php if ($action['ajax']): ?>
+              <td><a class="<?php echo $action['class']; ?>" href="javascript:void(0);" onClick="<?=$this->getMethodUrl($row, $action['method'])?>"><?php echo $action['label'] ?></a></td>
+            <?php else: ?>
+              <td><a class="<?php echo $action['class']; ?>" href="<?=$this->getMethodUrl($row, $action['method'], false)?>"><?php echo $action['label'] ?></a></td>
+            <?php endif;?>
+         <?php endforeach;?>
+        <?php endif;?>
+
+    </tr>
+    <?php endforeach?>
+  <?php else: ?>
       <tr><td colspan="10" align="center"><b>No Data For Product</b></td></tr>
-  <?php endif ?>
+  <?php endif?>
   </tbody>
 </table>
 </div>
+
+
+
+<?php /*<a href="javascript:void(0)" onclick="object.setUrl('<?php echo $this->getUrl()->getUrl('form', null, [], true) ?>').resetParams().load()" class="btn btn-primary">Add Product</a><br><br>*/?>

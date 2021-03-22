@@ -8,13 +8,27 @@ use Block\Core\Edit;
  */
 class Form extends \Block\Core\Edit
 {
+    protected $brands;
 
     public function __construct()
     {
         parent::__construct();
         $this->setTemplate('Admin/Product/Edit/Tabs/form.php');
     }
+    public function getBrands()
+    {
+        if (!$this->brands) {
+            $this->setBrands();
+        }
+        return $this->brands;
+    }
+    public function setBrands()
+    {
+        $brands = \Mage::getModel('Model\Brand');
+        $rows = $brands->all();
+        $this->brands = $rows;
 
+    }
     // protected function setproduct($product = NULL){
     //     if ($this->product) {
     //         $this->product = $product;

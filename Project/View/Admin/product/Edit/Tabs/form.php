@@ -6,6 +6,20 @@
 
 <hr><br>
 <?php $product = $this->getTableRow();?>
+<?php $brands = $this->getBrands();?>
+<div class="form-row">
+    <div class="form-group col-md-12">
+      <label for="inputEmail4">Select Brand</label>
+      <select class="custom-select" name="product[brandId]" required>
+        <option value="">--Select--</option>
+        <?php foreach ($brands->getData() as $key => $value): ?>
+          <?php echo $key; ?>
+          <option value="<?php echo $value->brandId; ?>" <?php if ($product->brandId == $value->brandId): ?> selected <?php endif?>><?php echo $value->name; ?></option>
+        <?php endforeach?>
+      </select>
+    </div>
+
+  </div>
   <div class="form-row">
     <div class="form-group col-md-6">
       <label for="inputEmail4">Name</label>

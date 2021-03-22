@@ -18,7 +18,7 @@ class CustomerGroup extends \Model\Core\Table
     public function getStatusOptions()
     {
         return [
-            self::STATUS_DESABLED => "Disable", //or use self::
+            self::STATUS_DESABLED => "Disable",
             self::STATUS_ENABLE => "Enable",
         ];
     }

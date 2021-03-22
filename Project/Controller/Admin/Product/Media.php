@@ -76,7 +76,6 @@ class Media extends \Controller\Core\Admin
             //delete image from folder
             $queryImage = "SELECT image FROM media where mediaId IN $ids";
             $rows = $media->all($queryImage);
-
             foreach ($rows->getData() as $key => $imageName) {
 
                 foreach ($imageName->data as $value) {

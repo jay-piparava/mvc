@@ -22,7 +22,7 @@
           	   	<a class="nav-link" href="http://localhost/Project">Home</a>
           	</li>
            	<li class="nav-item active">
-             		 <a class="nav-link" href="javascript:void(0)" onclick="object.setUrl('<?php echo $this->getUrl()->getUrl('gridHtml', 'Admin_Product', null, true) ?>').resetParams().load();">Product</a>
+             		 <a class="nav-link" href="javascript:void(0)" onclick="object.setUrl('<?php echo $this->getUrl()->getUrl('gridHtml', 'Admin_Product', ['page' => 1], true) ?>').resetParams().load();">Product</a>
             	</li>
           	<li class="nav-item active">
               	<a class="nav-link" href="javascript:void(0)" onclick="object.setUrl('<?php echo $this->getUrl()->getUrl('gridHtml', 'Admin_Category', null, true) ?>').resetParams().load();">Category</a>

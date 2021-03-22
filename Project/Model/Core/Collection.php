@@ -1,25 +1,25 @@
 <?php
-namespace Model\Core; 
+namespace Model\Core;
+
 /**
- * 
+ *
  */
 class Collection
 {
-	public $data = [];
+    public $data = [];
 
-	public function setData(array $data)
-	{
-		$this->data = $data;
-	}
+    public function setData(array $data)
+    {
+        $this->data = $data;
+    }
 
-	public function getData()
-	{
-		return $this->data;
-	}
+    public function getData()
+    {
+        return $this->data;
+    }
 
-	public function counData()
-	{
-		return count($this->data);
-	}
+    public function countData()
+    {
+        return count($this->data);
+    }
 }
-?>

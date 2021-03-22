@@ -48,7 +48,8 @@ Base.prototype = {
 		return this;
 	},
 	setForm: function (form) {
-        this.setMethod($(form).attr('method'));
+		this.setMethod($(form).attr('method'));
+		// alert($(form).attr('action'));
         this.setUrl($(form).attr('action'));
         this.setParams($(form).serializeArray());
         return this;
