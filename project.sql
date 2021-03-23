@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 18, 2021 at 02:26 PM
+-- Generation Time: Mar 23, 2021 at 04:55 AM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.2.34
 
@@ -124,6 +124,28 @@ INSERT INTO `attribute_option` (`optionId`, `name`, `attributeId`, `sortOrder`) 
 (46, 'Red', 12, 1),
 (47, 'Green', 12, 2),
 (48, 'Yellow', 12, 3);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `brand`
+--
+
+CREATE TABLE `brand` (
+  `brandId` int(11) NOT NULL,
+  `name` varchar(50) NOT NULL DEFAULT 'No Name',
+  `image` varchar(255) NOT NULL,
+  `sortOrder` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `brand`
+--
+
+INSERT INTO `brand` (`brandId`, `name`, `image`, `sortOrder`) VALUES
+(2, 'Raymond', '1616471595-1612-screen3.png', 2),
+(3, 'Bata', '1616471632-7742-screen2.png', 1),
+(4, 'Vimal', '1616471636-2246-screen5.png', 3);
 
 -- --------------------------------------------------------
 
@@ -437,6 +459,12 @@ ALTER TABLE `attribute_option`
   ADD KEY `attributeId` (`attributeId`);
 
 --
+-- Indexes for table `brand`
+--
+ALTER TABLE `brand`
+  ADD PRIMARY KEY (`brandId`);
+
+--
 -- Indexes for table `category`
 --
 ALTER TABLE `category`
@@ -518,6 +546,12 @@ ALTER TABLE `attribute`
 --
 ALTER TABLE `attribute_option`
   MODIFY `optionId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
+
+--
+-- AUTO_INCREMENT for table `brand`
+--
+ALTER TABLE `brand`
+  MODIFY `brandId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `category`
