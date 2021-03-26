@@ -1,12 +1,6 @@
 <?php
 namespace Block\Core;
 
-\Mage::loadFileByClassName('Block\Core\Layout\Content');
-\Mage::loadFileByClassName('Block\Core\Layout\Header');
-\Mage::loadFileByClassName('Block\Core\Layout\Footer');
-\Mage::loadFileByClassName('Block\Core\Layout\Message');
-\Mage::loadFileByClassName('Block\Core\Layout\Sidebar');
-\Mage::loadFileByClassName('Block\Core\Template');
 
 class Layout extends Template
 {

@@ -1,13 +1,12 @@
 <?php
 namespace Block\Core;
-
-\Mage::loadFileByClassName('Block\Core\Template');
 /**
  *
  */
 class Grid extends \Block\Core\Template
 {
     protected $collection = null;
+    protected $pager = null;
     protected $columns = [];
     protected $actions = [];
     protected $status = [];
@@ -39,6 +38,17 @@ class Grid extends \Block\Core\Template
         $this->collection = $collection;
 
         return $this;
+    }
+    public function getPager()
+    {
+        if (!$this->pager) {
+           return \Mage::getController('controller\Core\Pager');
+        }
+        return $this->pager;
+    }
+    public function setPager(\controller\Core\Pager $pager)
+    {
+        $this->pager = $pager;
     }
 
     public function prepareCollection()

@@ -1,7 +1,6 @@
 <?php
 namespace Block\Customer;
 
-\Mage::loadFileByClassName('Block\Core\Template');
 
 class Layout extends \Block\Core\Template
 {

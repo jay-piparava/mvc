@@ -1,8 +1,6 @@
 <?php
 namespace Controller\Admin;
 
-\Mage::loadFileByClassName('Model\Core\Adapter');
-\Mage::loadFileByClassName('Controller\Core\Admin');
 
 date_default_timezone_set('Asia/Calcutta');
 /**

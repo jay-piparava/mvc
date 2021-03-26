@@ -1,13 +1,6 @@
 <?php
 namespace Block\Admin;
 
-\Mage::loadFileByClassName('Block\Admin\Layout\Content');
-\Mage::loadFileByClassName('Block\Admin\Layout\Header');
-\Mage::loadFileByClassName('Block\Admin\Layout\Footer');
-\Mage::loadFileByClassName('Block\Admin\Layout\Message');
-\Mage::loadFileByClassName('Block\Admin\Layout\Sidebar');
-\Mage::loadFileByClassName('Block\Core\Template');
-
 class Layout extends \Block\Core\Template
 {
     public function __construct()

@@ -6,7 +6,7 @@ class Pager
 {
     protected $totalRecords = null;
     protected $noOfPage = null;
-    protected $recordsPerPage = 5;
+    protected $recordsPerPage = null;
     protected $currentPage = null;
     protected $start = 1;
     protected $next = null;
@@ -156,9 +156,9 @@ class Pager
     }
 
 }
-echo "<pre>";
-$abc = new pager();
-$abc->setTotalRecords(100);
-$abc->setCurrentPage($_GET['page']);
-$abc->calculate();
-print_r($abc);
+// echo "<pre>";
+// $abc = new pager();
+// $abc->setTotalRecords(100);
+// $abc->setCurrentPage($_GET['page']);
+// $abc->calculate();
+// print_r($abc);

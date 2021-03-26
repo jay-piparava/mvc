@@ -1,8 +1,5 @@
 <?php
 namespace Block\Admin\Product\Edit;
-
-\Mage::loadFileByClassName('Block\Core\Edit\Tabs');
-
 /**
  *
  */

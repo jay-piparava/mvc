@@ -34,7 +34,7 @@
                 <a class="nav-link" href="javascript:void(0)" onclick="object.setUrl('<?php echo $this->getUrl()->getUrl('gridHtml', 'Admin_CustomerGroup', [], true); ?>').resetParams().load();" >Customer Group</a>
               </li>
             	<li class="nav-item active">
-              	<a class="nav-link" href="javascript:void(0)" onclick="object.setUrl('<?php echo $this->getUrl()->getUrl('gridHtml', 'Admin_Payment', [], true); ?>').resetParams().load();">Payment</a>
+              	<a class="nav-link" href="javascript:void(0)" onclick="object.setUrl('<?php echo $this->getUrl()->getUrl('gridHtml', 'Admin_Payment', ['page' => 1], true); ?>').resetParams().load();">Payment</a>
             	</li>
             	<li class="nav-item active">
               	<a class="nav-link" href="javascript:void(0)" onclick="object.setUrl('<?php echo $this->getUrl()->getUrl('gridHtml', 'Admin_Shiping', [], true); ?>').resetParams().load();" >Shipping</a>

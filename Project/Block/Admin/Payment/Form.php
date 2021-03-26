@@ -1,7 +1,6 @@
 <?php
 namespace Block\Admin\Payment;
 
-\Mage::loadFileByClassName('Block\Core\Edit');
 /**
  *
  */

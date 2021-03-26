@@ -1,6 +1,5 @@
 <?php
 namespace Model;
-\Mage::LoadFileByClassName('Model\Core\Table');
 /**
  * 
  */

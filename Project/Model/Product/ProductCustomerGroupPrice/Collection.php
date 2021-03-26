@@ -1,7 +1,6 @@
 <?php
 namespace Model\Product\ProductCustomerGroupPrice;
 
-\Mage::loadFileByClassName('Model\Core\Collection');
 /**
  *
  */

@@ -3,7 +3,6 @@ namespace Controller\Admin\Attribute;
 
 use Mage;
 
-\Mage::loadFileByClassName('Controller\Core\Admin');
 
 class AttributeOption extends \Controller\Core\Admin
 {

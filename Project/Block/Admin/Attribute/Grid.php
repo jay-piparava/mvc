@@ -1,7 +1,6 @@
 <?php
 namespace Block\Admin\Attribute;
 
-\Mage::loadFileByClassName('Block\Core\Grid');
 
 class Grid extends \Block\Core\Grid
 {

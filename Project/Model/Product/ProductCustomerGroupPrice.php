@@ -1,7 +1,6 @@
 <?php
 namespace Model\Product;
 
-\Mage::LoadFileByClassName('Model\Core\Table');
 /**
  *
  */

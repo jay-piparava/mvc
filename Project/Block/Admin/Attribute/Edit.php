@@ -1,7 +1,6 @@
 <?php
 namespace Block\Admin\Attribute;
 
-\Mage::loadFileByClassName('Block\Core\Edit');
 /**
  *
  */

@@ -14,7 +14,7 @@
         <option value="">--Select--</option>
         <?php foreach ($brands->getData() as $key => $value): ?>
           <?php echo $key; ?>
-          <option value="<?php echo $value->brandId; ?>" <?php if ($product->brandId == $value->brandId): ?> selected <?php endif?>><?php echo $value->name; ?></option>
+          <option value="<?php echo $value->brandId; ?>" <?php if ($product->brandId == $value->brandId): ?> selected <?php endif?>><?php echo $value->bname; ?></option>
         <?php endforeach?>
       </select>
     </div>

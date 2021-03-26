@@ -1,8 +1,6 @@
 <?php
 namespace Model\Customer;
 
-\Mage::loadFileByClassName('Model\Core\Collection');
-
 /**
  *
  */

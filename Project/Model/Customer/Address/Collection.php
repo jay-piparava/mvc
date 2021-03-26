@@ -1,7 +1,6 @@
 <?php
 namespace Model\Customer\Address;
 
-\Mage::loadFileByClassName('Model\Core\Collection');
 /**
  *
  */

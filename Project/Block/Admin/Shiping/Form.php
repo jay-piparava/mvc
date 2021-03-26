@@ -1,10 +1,6 @@
 <?php
 namespace Block\Admin\Shiping;
 
-\Mage::loadFileByClassName('Block\Core\Edit');
-/**
- *
- */
 class Form extends \Block\Core\Edit
 {
 

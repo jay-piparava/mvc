@@ -1,6 +1,5 @@
 <?php
 namespace Block\Core\Layout;
-\Mage::loadFileByClassName('Block\Core\Template');
 
 class Content extends \Block\Core\Template
 {

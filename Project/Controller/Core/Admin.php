@@ -1,8 +1,7 @@
 <?php
 namespace Controller\Core;
 
-\Mage::loadFileByClassName('Block\Core\Layout');
-\Mage::loadFileByClassName('Controller\Core\Abstracts');
+
 
 /**
  *

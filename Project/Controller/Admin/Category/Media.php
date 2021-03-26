@@ -1,7 +1,6 @@
 <?php
 namespace Controller\Admin\Category;
 
-\Mage::loadFileByClassName('controller\core\admin');
 
 class Media extends \Controller\Core\Admin
 {

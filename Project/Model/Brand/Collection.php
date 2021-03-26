@@ -1,7 +1,6 @@
 <?php
 namespace Model\Brand;
 
-\Mage::loadFileByClassName('Model\Core\Collection');
 /**
  *
  */

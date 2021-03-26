@@ -1,7 +1,6 @@
 <?php
 namespace Block\Admin\Payment;
 
-\Mage::loadFileByClassName('Block\Core\Grid');
 /**
  *
  */
@@ -16,8 +15,20 @@ class Grid extends \Block\Core\Grid
 
     public function prepareCollection()
     {
+        $pager = \Mage::getController('Controller\Core\Pager');
+        $count = \Mage::getModel('Model\Payment');
+        $rows = $count->all();
+        $count = $rows->countData();
+
+        $pager->setTotalRecords($count);
+        $pager->setRecordsPerPage(5);
+        $pager->setCurrentPage($_GET['page']);
+        $startFrom = ($pager->getCurrentPage() - 1) * $pager->getRecordsPerPage();
+        $pager->calculate();
+        $this->setPager($pager);
         $payments = \Mage::getModel('Model\Payment');
         $filter = \Mage::getModel('Model\Admin\Filter');
+
         if ($filterValue = $filter->getFilter('payment')) {
             $filedName = array_keys($filterValue);
             $values = array_values($filterValue);
@@ -38,9 +49,16 @@ class Grid extends \Block\Core\Grid
             }
             $query = "SELECT * FROM `{$payments->getTableName()}` $projection";
             $rows = $payments->all($query);
+            $count = $rows->countData();
+            $pager->setTotalRecords($count);
+            $startFrom = ($pager->getCurrentPage() - 1) * $pager->getRecordsPerPage();
+            $pager->calculate();
+            $query = "SELECT * FROM `{$payments->getTableName()}` $projection LIMIT $startFrom,{$pager->getRecordsPerPage()}";
+            $rows = $payments->all($query);
             $this->setCollection($rows);
         } else {
-            $rows = $payments->all();
+            $query = "SELECT * FROM `{$payments->getTableName()}` LIMIT $startFrom ,{$pager->getRecordsPerPage()}";
+            $rows = $payments->all($query);
             $this->setCollection($rows);
         }
     }

@@ -29,7 +29,7 @@
 					<td><img src = '<?php echo $image ?>' height='80px' width='100px'></img></td>
 
 					<input type='hidden' value='<?php echo $result->brandId; ?>' name='label[brand][<?php echo $key; ?>][brandId]'>
-					<td><input type='text' value='<?php echo $result->name; ?>' name='label[brand][<?php echo $key; ?>][name]'></td>
+					<td><input type='text' value='<?php echo $result->bname; ?>' name='label[brand][<?php echo $key; ?>][name]'></td>
 					<td><input type='text' value='<?php echo $result->sortOrder; ?>' name='label[brand][<?php echo $key; ?>][sortOrder]'></td>
 					<?php if ($result->status == 0): ?>
             			<td align="center"><a class="btn btn-success" href="javascript:void(0)" onclick="object.setUrl('<?php echo $this->getUrl()->getUrl('status', null, ['id' => $result->brandId]); ?>').resetParams().load();">Enable</a></td>

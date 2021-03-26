@@ -1,7 +1,6 @@
 <?php
 namespace Block\Admin\Brand;
 
-\Mage::loadFileByClassName('Block\Core\Template');
 /**
  *
  */

@@ -1,7 +1,6 @@
 <?php
 namespace Model\Product\Media;
 
-\Mage::loadFileByClassName('Model\Core\Collection');
 /**
  *
  */

@@ -1,6 +1,5 @@
 <?php
 namespace Model\Admin;
-\Mage::loadFileByClassName('Model\Admin\Session');
 
 class Message extends Session
 {

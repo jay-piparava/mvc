@@ -1,7 +1,6 @@
 <?php
 namespace Block\Customer\Layout;
 
-\Mage::loadFileByClassName('Block\Core\Template');
 
 class Header extends \Block\Core\Template
 {

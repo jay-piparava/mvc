@@ -1,6 +1,5 @@
 <?php
 namespace Model\Admin;
-\Mage::loadFileByClassName('Model\Core\Collection'); 
 /**
  * 
  */

@@ -1,7 +1,6 @@
 <?php
 namespace Block\Admin\Category;
 
-\Mage::loadFileByClassName('Block\Core\Edit');
 
 /**
  *

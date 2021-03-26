@@ -1,6 +1,5 @@
 <?php
 namespace Block\Admin\Home;
-\Mage::loadFileByClassName('Block\Core\Template');
 /**
  * 
  */

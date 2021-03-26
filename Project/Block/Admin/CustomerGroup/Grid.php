@@ -1,7 +1,6 @@
 <?php
 namespace Block\Admin\CustomerGroup;
 
-\Mage::loadFileByClassName('Block\Core\Grid');
 /**
  *
  */
@@ -15,6 +14,20 @@ class Grid extends \Block\Core\Grid
 
     public function prepareCollection()
     {
+        $pager = \Mage::getController('Controller\Core\Pager');
+        $count = \Mage::getModel('Model\Customer\CustomerGroup');
+        $rows = $count->all();
+        $count = \count($rows->data);
+        // print_r($rows);
+        // $count = $rows->countData();
+
+        $pager->setTotalRecords($count);
+        $pager->setRecordsPerPage(5);
+        $pager->setCurrentPage($this->getRequest()->getGet('page', 1));
+        $startFrom = ($pager->getCurrentPage() - 1) * $pager->getRecordsPerPage();
+        $pager->calculate();
+        $this->setPager($pager);
+
         $customerGroups = \Mage::getModel('Model\Customer\CustomerGroup');
         $filter = \Mage::getModel('Model\Admin\Filter');
         if ($filterValue = $filter->getFilter('customerGroup')) {
@@ -37,9 +50,23 @@ class Grid extends \Block\Core\Grid
             }
             $query = "SELECT * FROM `{$customerGroups->getTableName()}` $projection";
             $rows = $customerGroups->all($query);
+            if ($rows) {
+                $count = \count($rows->data);
+            } else {
+                $count = 0;
+                $pager->setCurrentPage(1);
+            }
+
+            $pager->setTotalRecords($count);
+            $startFrom = ($pager->getCurrentPage() - 1) * $pager->getRecordsPerPage();
+            $pager->calculate();
+
+            $query = "SELECT * FROM `{$customerGroups->getTableName()}` $projection LIMIT $startFrom ,{$pager->getRecordsPerPage()}";
+            $rows = $customerGroups->all($query);
             $this->setCollection($rows);
         } else {
-            $rows = $customerGroups->all();
+            $query = "SELECT * FROM `{$customerGroups->getTableName()}` LIMIT $startFrom ,{$pager->getRecordsPerPage()}";
+            $rows = $customerGroups->all($query);
             $this->setCollection($rows);
         }
 

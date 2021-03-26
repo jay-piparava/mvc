@@ -1,7 +1,6 @@
 <?php
 namespace Block\Admin\Customer;
 
-\Mage::loadFileByClassName('Block\Core\Grid');
 /**
  *
  */
@@ -14,6 +13,17 @@ class Grid extends \Block\Core\Grid
     }
     public function prepareCollection()
     {
+        $pager = \Mage::getController('Controller\Core\Pager');
+        $count = \Mage::getModel('Model\Customer');
+        $rows = $count->all();
+        $count = $rows->countData();
+
+        $pager->setTotalRecords($count);
+        $pager->setRecordsPerPage(5);
+        $pager->setCurrentPage($this->getRequest()->getGet('page', 1));
+        $startFrom = ($pager->getCurrentPage() - 1) * $pager->getRecordsPerPage();
+        $pager->calculate();
+        $this->setPager($pager);
         $customer = \Mage::getModel('Model\Customer');
         $query = "SELECT
 							c.`customerId`,
@@ -25,7 +35,7 @@ class Grid extends \Block\Core\Grid
 							c.`status`,
 							cg.`name`
 						FROM `customer` AS c , `customer_group` AS cg
-						WHERE c.`groupId` = cg.`groupId`";
+						WHERE c.`groupId` = cg.`groupId` LIMIT $startFrom,{$pager->getRecordsPerPage()}";
         $rows = $customer->all($query);
         $this->setCollection($rows);
         return $this;

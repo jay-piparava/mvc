@@ -1,7 +1,6 @@
 <?php
 namespace Controller\Admin;
 
-\Mage::loadFileByClassName('Controller/Core/Admin');
 /**
  *
  */

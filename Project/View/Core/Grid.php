@@ -6,6 +6,33 @@
 <?php $filters = $this->getFilters();?>
 <?php $filterButtons = $this->getFilterButtons();?>
 
+<style>
+.center {
+  text-align: center;
+}
+
+.pagination {
+  display: inline-block;
+}
+
+.pagination a {
+  color: black;
+  float: left;
+  padding: 8px 16px;
+  text-decoration: none;
+  transition: background-color .3s;
+  border: 1px solid #ddd;
+  margin: 0 4px;
+}
+
+.pagination a.active {
+  background-color: #4d79ff;
+  color: white;
+  border: 1px solid #4d79ff;
+}
+
+.pagination a:hover:not(.active) {background-color: #ddd;}
+</style>
 <div class="container">
 	<h1><?=$this->getTitle();?></h1>
     <?php if ($buttons): ?>
@@ -28,13 +55,13 @@
     <?php if ($filterButtons): ?>
       <?php foreach ($filterButtons as $key => $filters): ?>
           <th><?php if ($filters['ajax']): ?>
-              <td><a class="<?php echo $filters['class']; ?>" href="javascript:void(0);" onclick="object.resetParams().setForm('#filter').load();"><?php echo $filters['label'] ?></a></td>
+                <td><a class="<?php echo $filters['class']; ?>" href="javascript:void(0);" onclick="object.resetParams().setForm('#filter').load();"><?php echo $filters['label'] ?></a></td>
             <?php else: ?>
               <td><a class="<?php echo $filters['class']; ?>" ><?php echo $filters['label'] ?></a></td>
             <?php endif;?>
           </th>
       <?php endforeach;?>
-      <td><button type='button' class="btn btn-outline-danger" onclick="setText(); object.resetParams().setForm('#filter').load();	">Clear</button></td>
+      <td><button type='button' class="btn btn-outline-danger" onclick="setText(); object.resetParams().setForm('#filter').load();	">Clear Filters</button></td>
     <?php endif?>
     </tr>
     <tr>
@@ -82,7 +109,6 @@
             <?php endif;?>
          <?php endforeach;?>
         <?php endif;?>
-
     </tr>
     <?php endforeach?>
   <?php else: ?>
@@ -92,6 +118,18 @@
 </table>
 </div>
 </form>
+<center>
+
+<div class="pagination">
+  <?php if ($this->getPager()->getPrevious()): ?>
+    <a href="javascript:void(0);" onclick="object.resetParams().setUrl('<?php echo $this->getUrl()->getUrl(null, null, ['page' => $this->getPager()->getPrevious()]) ?>').load();">Privious</a>
+  <?php endif?>
+    <a href="javascript:void(0);" class="active"><?php echo $this->getPager()->getCurrentPage(); ?></a>
+  <?php if ($this->getPager()->getNext()): ?>
+    <a href="javascript:void(0);" onclick="object.resetParams().setUrl('<?php echo $this->getUrl()->getUrl(null, null, ['page' => $this->getPager()->getNext()]) ?>').load();">Next</a>
+  <?php endif?>
+</div>
+</center>
 
 <script>
   function setText(){

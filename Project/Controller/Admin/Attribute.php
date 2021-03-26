@@ -1,8 +1,6 @@
 <?php
 namespace Controller\Admin;
 
-\Mage::loadFileByClassName('Controller\Core\Admin');
-
 class Attribute extends \Controller\Core\Admin
 {
     public function indexAction()

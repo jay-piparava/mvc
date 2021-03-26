@@ -1,7 +1,6 @@
 <?php
 namespace Block\Admin\Customer\Edit;
 
-\Mage::loadFileByClassName('Block\Core\Edit\Tabs');
 
 /**
  *

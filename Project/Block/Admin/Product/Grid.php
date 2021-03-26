@@ -1,7 +1,6 @@
 <?php
 namespace Block\Admin\Product;
 
-\Mage::loadFileByClassName('Block\Core\Grid');
 /**
  *
  */
@@ -14,6 +13,18 @@ class Grid extends \Block\Core\Grid
     }
     public function prepareCollection()
     {
+        $pager = \Mage::getController('Controller\Core\Pager');
+        $count = \Mage::getModel('Model\Payment');
+        $rows = $count->all();
+        $count = $rows->countData();
+
+        $pager->setTotalRecords($count);
+        $pager->setRecordsPerPage(5);
+        $pager->setCurrentPage($this->getRequest()->getGet('page', 1));
+        $startFrom = ($pager->getCurrentPage() - 1) * $pager->getRecordsPerPage();
+        $pager->calculate();
+        $this->setPager($pager);
+
         $product = \Mage::getModel('Model\Product');
         $filter = \Mage::getModel('Model\Admin\Filter');
         if ($filterValue = $filter->getFilter('product')) {
@@ -29,17 +40,33 @@ class Grid extends \Block\Core\Grid
             }
             if ($projection) {
                 $projection = rtrim($projection, ',');
-                //$projection .= ' AND';
+                $words = explode(" ", $projection);
+                array_splice($words, -2);
+                $projection = implode(" ", $words);
             }
-            $query = "SELECT p.*,
-                    b.name as 'brandName'
-                    FROM `product` AS p,`brand` AS b
-                    WHERE $projection  p.brandId = b.brandId;
-                    ";
+
+            if ($projection) {
+                $query = "select p.*,b.bname as `brandName` from product p join brand b on p.brandId=b.brandId where $projection";
+                $rows = $product->all($query);
+                $count = $rows->countData();
+                $pager->setTotalRecords($count);
+                $startFrom = ($pager->getCurrentPage() - 1) * $pager->getRecordsPerPage();
+                $pager->calculate();
+                $query = "select p.*,b.bname as `brandName` from product p join brand b on p.brandId=b.brandId where $projection LIMIT $startFrom,{$pager->getRecordsPerPage()}";
+            } else {
+                $query = "select p.*,b.bname as `brandName` from product p join brand b on p.brandId=b.brandId";
+                $rows = $product->all($query);
+                $count = $rows->countData();
+                $pager->setTotalRecords($count);
+                $startFrom = ($pager->getCurrentPage() - 1) * $pager->getRecordsPerPage();
+                $pager->calculate();
+                $query = "select p.*,b.bname as `brandName` from product p join brand b on p.brandId=b.brandId LIMIT $startFrom,{$pager->getRecordsPerPage()}";
+            }
             $row = $product->all($query);
             $this->setCollection($row);
         } else {
-            $rows = $product->all();
+            $query = "select p.*,b.bname as `brandName` from product p join brand b on p.brandId=b.brandId LIMIT $startFrom,{$pager->getRecordsPerPage()}";
+            $rows = $product->all($query);
             $this->setCollection($rows);
         }
     }
@@ -73,11 +100,13 @@ class Grid extends \Block\Core\Grid
             'placeholder' => 'Id',
             'class' => 'clear',
         ]);
-        // $this->addfilter('brandId', [
-        //     'name' => 'filter[product][brandId]',
-        //     'style' => 'width:70px',
-        //     'placeholder' => 'Brand',
-        // ]);
+        $this->addfilter('brandName', [
+            'name' => 'filter[product][bname]',
+            'style' => 'width:70px',
+            'value' => $values['bname'],
+            'placeholder' => 'Brand',
+            'class' => 'clear',
+        ]);
         $this->addfilter('name', [
             'name' => 'filter[product][name]',
             'style' => 'width:70px',

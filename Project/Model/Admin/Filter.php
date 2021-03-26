@@ -1,7 +1,6 @@
 <?php
 namespace Model\Admin;
 
-\Mage::loadFileByClassName('Model\Admin\Session');
 
 class Filter extends Session
 {

@@ -1,7 +1,6 @@
 <?php
 namespace Block\Admin\Cms;
 
-\Mage::loadFileByClassName('Block\Core\Grid');
 /**
  *
  */

@@ -1,8 +1,6 @@
 <?php
 namespace Controller\Admin;
 
-\Mage::loadFileByClassName('Model\Core\Adapter');
-\Mage::loadFileByClassName('Controller\Core\Admin');
 
 date_default_timezone_set('Asia/Calcutta');
 /**
@@ -61,7 +59,7 @@ class Brand extends \Controller\Core\Admin
                     $brand->brandId = $value['brandId'];
                 }
                 if (array_key_exists('name', $value)) {
-                    $brand->name = $value['name'];
+                    $brand->bname = $value['name'];
                 }
                 if (array_key_exists('sortOrder', $value)) {
                     $brand->sortOrder = $value['sortOrder'];

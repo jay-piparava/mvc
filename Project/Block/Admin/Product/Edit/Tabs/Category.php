@@ -1,6 +1,5 @@
 <?php
 namespace Block\Product\Edit\Tabs;
-\Mage::loadFileByClassName('Block\Core\Template');
 /**
  * 
  */

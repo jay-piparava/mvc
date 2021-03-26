@@ -1,8 +1,6 @@
 <?php
 namespace Controller\Admin;
 
-\Mage::loadFileByClassName('Model\Core\Adapter');
-\Mage::loadFileByClassName('Controller\Core\Admin');
 
 date_default_timezone_set('Asia/Calcutta');
 /**
@@ -74,11 +72,11 @@ class Payment extends \Controller\Core\Admin
                 $message = \Mage::getModel('Model\Admin\Message');
                 $message->setFailure('Unable to save Record...');
             }
-            $this->redirect('gridHtml', null, null, true);
+            $this->redirect('gridHtml', null, ['page'=>1], true);
         } catch (\Exception $e) {
             $message = \Mage::getModel('Model\Admin\Message');
             $message->setFailure($e->getMessage());
-            $this->redirect('gridHtml', null, null, true);
+            $this->redirect('gridHtml', null, ['page'=>1], true);
         }
     }
     public function deleteAction()
@@ -97,11 +95,11 @@ class Payment extends \Controller\Core\Admin
                 $message->setFailure('Unable to Delete Record...');
             }
 
-            $this->redirect('gridHtml', null, null, true);
+            $this->redirect('gridHtml', null, ['page'=>1], true);
         } catch (\Exception $e) {
             $message = \Mage::getModel('Model\Admin\Message');
             $message->setFailure($e->getMessage());
-            $this->redirect('gridHtml', null, null, true);
+            $this->redirect('gridHtml', null, ['page'=>1], true);
         }
     }
 
@@ -120,6 +118,6 @@ class Payment extends \Controller\Core\Admin
                 $status->save();
             }
         }
-        $this->redirect('gridHtml', null, null, true);
+        $this->redirect('gridHtml', null, ['page'=>1], true);
     }
 }

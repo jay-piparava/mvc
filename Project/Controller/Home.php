@@ -1,7 +1,6 @@
 <?php
 namespace Controller;
 
-\Mage::loadFileByClassName('Controller\Core\Customer');
 
 class Home extends Core\Customer
 {

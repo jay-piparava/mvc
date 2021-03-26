@@ -1,7 +1,6 @@
 <?php
 namespace Block\Admin\Attribute\Edit\Tabs;
 
-\Mage::loadFileByClassName('Block\Core\Edit');
 
 class AttributeOption extends \Block\Core\Edit
 {

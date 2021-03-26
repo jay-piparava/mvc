@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 23, 2021 at 04:55 AM
+-- Generation Time: Mar 26, 2021 at 03:12 PM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.2.34
 
@@ -133,8 +133,9 @@ INSERT INTO `attribute_option` (`optionId`, `name`, `attributeId`, `sortOrder`) 
 
 CREATE TABLE `brand` (
   `brandId` int(11) NOT NULL,
-  `name` varchar(50) NOT NULL DEFAULT 'No Name',
+  `bname` varchar(50) NOT NULL DEFAULT 'No Name',
   `image` varchar(255) NOT NULL,
+  `status` tinyint(4) NOT NULL,
   `sortOrder` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -142,10 +143,10 @@ CREATE TABLE `brand` (
 -- Dumping data for table `brand`
 --
 
-INSERT INTO `brand` (`brandId`, `name`, `image`, `sortOrder`) VALUES
-(2, 'Raymond', '1616471595-1612-screen3.png', 2),
-(3, 'Bata', '1616471632-7742-screen2.png', 1),
-(4, 'Vimal', '1616471636-2246-screen5.png', 3);
+INSERT INTO `brand` (`brandId`, `bname`, `image`, `status`, `sortOrder`) VALUES
+(2, 'Raymond', '1616471595-1612-screen3.png', 0, 2),
+(3, 'Bata', '1616471632-7742-screen2.png', 0, 1),
+(4, 'Vimal', '1616471636-2246-screen5.png', 0, 3);
 
 -- --------------------------------------------------------
 
@@ -223,13 +224,13 @@ CREATE TABLE `customer` (
 --
 
 INSERT INTO `customer` (`customerId`, `groupId`, `firstName`, `lastName`, `email`, `mobile`, `password`, `status`, `createdAt`, `updatedAt`) VALUES
-(1, 1, 'jays', 'piparava1111', 'jaypiparava123@gmail.com', '8128211139', '413020463', 0, '2021-03-06 | 11:36:56', '2021-03-15 | 10:00:16'),
-(2, 1, 'jay', 'piparava', 'jaypiparava123@gmail.com', '8128211139', '42220364', 0, '2021-03-08 | 02:45:12', ''),
-(4, 3, 'jay', 'patel', 'jaypiparava123@gmail.coa', '8128211139', '459365506', 0, '2021-03-09 | 09:25:09', ''),
-(7, 1, 'aa', 'aa', 'jaypiparava@gmail.com', 'aa', '217748809', 0, '2021-03-15 | 09:13:12', ''),
-(11, 1, 'jay', 'piparava', 'jaypiparava123@gmail.com', '8128211139', '661450413', 0, '2021-03-15 | 09:34:34', ''),
-(12, 1, 'jay', 'piparava', 'jaypiparava123@gmail.com', '8128211139', '367184958', 0, '2021-03-15 | 09:34:39', ''),
-(13, 1, 'jay', 'piparava', 'jaypiparava123@gmail.com', '8128211139', '794990578', 0, '2021-03-15 | 09:35:01', ''),
+(1, 14, 'jays', 'piparava1111', 'jaypiparava123@gmail.com', '8128211139', '413020463', 0, '2021-03-06 | 11:36:56', '2021-03-15 | 10:00:16'),
+(2, 14, 'jay', 'piparava', 'jaypiparava123@gmail.com', '8128211139', '42220364', 0, '2021-03-08 | 02:45:12', ''),
+(4, 14, 'jay', 'patel', 'jaypiparava123@gmail.coa', '8128211139', '459365506', 0, '2021-03-09 | 09:25:09', ''),
+(7, 14, 'aa', 'aa', 'jaypiparava@gmail.com', 'aa', '217748809', 0, '2021-03-15 | 09:13:12', ''),
+(11, 15, 'jay', 'piparava', 'jaypiparava123@gmail.com', '8128211139', '661450413', 0, '2021-03-15 | 09:34:34', ''),
+(12, 14, 'jay', 'piparava', 'jaypiparava123@gmail.com', '8128211139', '367184958', 0, '2021-03-15 | 09:34:39', ''),
+(13, 14, 'jay', 'piparava', 'jaypiparava123@gmail.com', '8128211139', '794990578', 0, '2021-03-15 | 09:35:01', ''),
 (14, 14, 'jay', 'piparava1111', 'jaypiparava@gmail.com', 'aa', '110859127', 1, '2021-03-15 | 12:16:56', '2021-03-18 | 12:11:27'),
 (15, 15, 'Heml', 'piparava', 'jaypiparava@gmail.com', 'aa', '39805226', 1, '2021-03-15 | 12:23:53', ''),
 (16, 14, 'jay111', 'ewgvr', 'jaypiparava@gmail.com', '1222', '234272677', 0, '2021-03-18 | 10:58:23', '2021-03-18 | 11:10:35'),
@@ -283,11 +284,10 @@ INSERT INTO `media` (`mediaId`, `productId`, `image`, `label`, `small`, `thumb`,
 (22, 58, '1616009548-1422-screen5.png', 'No Label', 1, 1, 1, 1),
 (23, 58, '1616009549-2475-screen5.png', 'No Label', 0, 0, 0, 0),
 (24, 58, '1616009569-1039-screen4.png', 'No Label', 0, 0, 0, 0),
-(30, 57, '1616038071-1117-screen6.png', 'No Label', 1, 1, 1, 1),
+(30, 57, '1616038071-1117-screen6.png', 'No Label', 0, 1, 1, 1),
 (35, 57, '1616039079-2171-screen6.png', 'No Label', 0, 0, 0, 0),
-(36, 57, '1616039370-8299-screen4.png', 'No Label', 0, 0, 0, 0),
-(37, 57, '1616043026-1387-screen7.png', 'No Label', 0, 0, 0, 0),
-(38, 57, '1616052012-1046-screen7.png', 'No Label', 0, 0, 0, 0);
+(38, 57, '1616052012-1046-screen7.png', 'No Label', 0, 0, 0, 0),
+(39, 57, '1616516924-2334-screen6.png', 'karan', 1, 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -310,8 +310,40 @@ CREATE TABLE `payment` (
 --
 
 INSERT INTO `payment` (`methodId`, `name`, `code`, `description`, `status`, `createdDate`, `updatedDate`) VALUES
-(5, 'Bedrooms', '11111', '1111', 1, '2021-03-10 | 12:18:39', '2021-03-15 | 10:32:24'),
-(7, 'Hemal', '200000', 'abcd', 0, '2021-03-15 | 10:34:37', '');
+(5, 'hemal', '11111', '1111', 0, '2021-03-10 | 12:18:39', '2021-03-15 | 10:32:24'),
+(7, 'hemal', '200000', 'abcd', 0, '2021-03-15 | 10:34:37', ''),
+(10, 'jay', '2001', 'abcdef', 0, '2021-03-23 | 09:43:09', ''),
+(11, 'hemal', '44444', 'abcdef', 0, '2021-03-23 | 09:43:18', ''),
+(12, 'jay', '200', '5g Phone', 0, '', ''),
+(13, 'hemal', '200', '5g Phone', 1, '', ''),
+(14, 'jay', '200', '5g Phone', 1, '', ''),
+(15, 'hemal', '200', '5g Phone', 1, '', ''),
+(16, 'jay', '200', '5g Phone', 1, '', ''),
+(17, 'hemal', '200', '5g Phone', 1, '', ''),
+(18, 'jay', '200', '5g Phone', 1, '', ''),
+(19, 'hemal', '200', '5g Phone', 1, '', ''),
+(20, 'jay', '200', '5g Phone', 1, '', ''),
+(21, 'jay', '200', '5g Phone', 1, '', ''),
+(22, 'jay', '200', '5g Phone', 1, '', ''),
+(23, 'jay', '200', '5g Phone', 0, '', ''),
+(24, 'jay', '200', '5g Phone', 1, '', ''),
+(25, 'jay', '200', '5g Phone', 1, '', ''),
+(26, 'jay', '200', '5g Phone', 1, '', ''),
+(27, 'jay', '200', '5g Phone', 1, '', ''),
+(28, 'jay', '200', '5g Phone', 1, '', ''),
+(29, 'jay', '200', '5g Phone', 1, '', ''),
+(30, 'jay', '200', '5g Phone', 1, '', ''),
+(31, 'jay', '200', '5g Phone', 1, '', ''),
+(32, 'jay', '200', '5g Phone', 1, '', ''),
+(33, 'jay', '200', '5g Phone', 1, '', ''),
+(34, 'jay', '200', '5g Phone', 1, '', ''),
+(35, 'jay', '200', '5g Phone', 1, '', ''),
+(36, 'jay', '200', '5g Phone', 1, '', ''),
+(37, 'Hemal', '44444', 'abcd', 0, '2021-03-23 | 07:38:35', ''),
+(38, 'Hemal', '44444', 'abcd', 0, '2021-03-23 | 07:38:36', ''),
+(39, 'Hemal', '44444', 'abcd', 0, '2021-03-23 | 07:41:40', ''),
+(40, 'Hemal', '44444', 'abcd', 0, '2021-03-23 | 07:41:41', ''),
+(41, 'Hemal', '', 'abcdef', 0, '2021-03-23 | 07:42:27', '');
 
 -- --------------------------------------------------------
 
@@ -321,6 +353,7 @@ INSERT INTO `payment` (`methodId`, `name`, `code`, `description`, `status`, `cre
 
 CREATE TABLE `product` (
   `productId` int(10) NOT NULL,
+  `brandId` int(11) NOT NULL,
   `name` varchar(50) NOT NULL,
   `price` int(50) NOT NULL,
   `discount` int(50) NOT NULL,
@@ -339,11 +372,51 @@ CREATE TABLE `product` (
 -- Dumping data for table `product`
 --
 
-INSERT INTO `product` (`productId`, `name`, `price`, `discount`, `quantity`, `description`, `sku`, `status`, `createdDate`, `updatedDate`, `hello`, `colors`, `Hobby`) VALUES
-(57, 'Mobile', 200, 21, 2300, 'abcd1', '3ad7df3f9db8bd', 1, '2021-03-15 | 10:51:59', '2021-03-18 | 12:27:48', 'hii', NULL, NULL),
-(58, 'Mobile', 200, 2, 2300, 'abcd1', '991b2bab2f4bad', 0, '2021-03-16 | 08:58:38', '', '2', 'Green', NULL),
-(59, 'Mobile', 200, 2, 2300, 'abcd1', '48fa1edb809830', 0, '2021-03-17 | 12:34:08', '2021-03-17 | 12:34:13', NULL, NULL, NULL),
-(60, 'Mobile1', 2001, 21, 23001, 'abcd1', '56228701a69182', 1, '2021-03-17 | 05:05:49', '2021-03-18 | 12:56:44', NULL, NULL, NULL);
+INSERT INTO `product` (`productId`, `brandId`, `name`, `price`, `discount`, `quantity`, `description`, `sku`, `status`, `createdDate`, `updatedDate`, `hello`, `colors`, `Hobby`) VALUES
+(57, 2, 'Mobile', 201, 212, 2300, 'abcd1', '3ad7df3f9db8bd', 1, '2021-03-15 | 10:51:59', '2021-03-25 | 09:13:36', 'hii', 'Green', NULL),
+(58, 0, 'Mobile', 200, 2, 2300, 'abcd1', '991b2bab2f4bad', 0, '2021-03-16 | 08:58:38', '', '2', 'Green', NULL),
+(59, 0, 'Mobile', 200, 2, 2300, 'abcd1', '48fa1edb809830', 0, '2021-03-17 | 12:34:08', '2021-03-17 | 12:34:13', NULL, NULL, NULL),
+(60, 0, 'Mobile1', 2001, 21, 23001, 'abcd1', '56228701a69182', 1, '2021-03-17 | 05:05:49', '2021-03-18 | 12:56:44', NULL, NULL, NULL),
+(62, 4, 'Mobile', 200, 21, 2300, 'abcd1s11', '9f7e765333d5e8', 1, '2021-03-24 | 12:08:03', '', NULL, NULL, NULL),
+(63, 2, 'BUSKOT', 200, 20, 0, 'kOTAN NO', '4c0ecfc45400e6', 1, '2021-03-24 | 12:08:35', '', NULL, NULL, NULL),
+(64, 2, 'jay', 200, 20, 200, '5g Phone', 'mobuile', 1, '', '', NULL, NULL, NULL),
+(65, 2, 'jay', 200, 20, 200, '5g Phone', 'mobuile', 1, '', '', NULL, NULL, NULL),
+(66, 2, 'jay', 200, 20, 200, '5g Phone', 'mobuile', 1, '', '', NULL, NULL, NULL),
+(67, 2, 'jay', 200, 20, 200, '5g Phone', 'mobuile', 1, '', '', NULL, NULL, NULL),
+(68, 2, 'jay', 200, 20, 200, '5g Phone', 'mobuile', 1, '', '', NULL, NULL, NULL),
+(69, 2, 'jay', 200, 20, 200, '5g Phone', 'mobuile', 1, '', '', NULL, NULL, NULL),
+(70, 2, 'jay', 200, 20, 200, '5g Phone', 'mobuile', 1, '', '', NULL, NULL, NULL),
+(71, 2, 'jay', 200, 20, 200, '5g Phone', 'mobuile', 1, '', '', NULL, NULL, NULL),
+(72, 2, 'jay', 200, 20, 200, '5g Phone', 'mobuile', 1, '', '', NULL, NULL, NULL),
+(73, 2, 'jay', 200, 20, 200, '5g Phone', 'mobuile', 1, '', '', NULL, NULL, NULL),
+(74, 2, 'jay', 200, 20, 200, '5g Phone', 'mobuile', 1, '', '', NULL, NULL, NULL),
+(75, 2, 'jay', 200, 20, 200, '5g Phone', 'mobuile', 1, '', '', NULL, NULL, NULL),
+(76, 2, 'jay', 200, 20, 200, '5g Phone', 'mobuile', 1, '', '', NULL, NULL, NULL),
+(77, 3, 'jay', 200, 20, 200, '5g Phone', 'mobuile', 1, '', '', NULL, NULL, NULL),
+(78, 3, 'jay', 200, 20, 200, '5g Phone', 'mobuile', 1, '', '', NULL, NULL, NULL),
+(79, 3, 'jay', 200, 20, 200, '5g Phone', 'mobuile', 1, '', '', NULL, NULL, NULL),
+(80, 3, 'jay', 200, 20, 200, '5g Phone', 'mobuile', 1, '', '', NULL, NULL, NULL),
+(81, 3, 'jay', 200, 20, 200, '5g Phone', 'mobuile', 1, '', '', NULL, NULL, NULL),
+(82, 3, 'jay', 200, 20, 200, '5g Phone', 'mobuile', 1, '', '', NULL, NULL, NULL),
+(83, 3, 'jay', 200, 20, 200, '5g Phone', 'mobuile', 1, '', '', NULL, NULL, NULL),
+(84, 3, 'jay', 200, 20, 200, '5g Phone', 'mobuile', 1, '', '', NULL, NULL, NULL),
+(85, 3, 'jay', 200, 20, 200, '5g Phone', 'mobuile', 1, '', '', NULL, NULL, NULL),
+(86, 3, 'jay', 200, 20, 200, '5g Phone', 'mobuile', 1, '', '', NULL, NULL, NULL),
+(87, 3, 'jay', 200, 20, 200, '5g Phone', 'mobuile', 1, '', '', NULL, NULL, NULL),
+(88, 4, 'jay', 200, 20, 200, '5g Phone', 'mobuile', 1, '', '', NULL, NULL, NULL),
+(89, 4, 'jay', 200, 20, 200, '5g Phone', 'mobuile', 1, '', '', NULL, NULL, NULL),
+(90, 4, 'jay', 200, 20, 200, '5g Phone', 'mobuile', 1, '', '', NULL, NULL, NULL),
+(91, 4, 'jay', 200, 20, 200, '5g Phone', 'mobuile', 1, '', '', NULL, NULL, NULL),
+(92, 4, 'jay', 200, 20, 200, '5g Phone', 'mobuile', 1, '', '', NULL, NULL, NULL),
+(93, 4, 'jay', 200, 20, 200, '5g Phone', 'mobuile', 1, '', '', NULL, NULL, NULL),
+(94, 4, 'jay', 200, 20, 200, '5g Phone', 'mobuile', 1, '', '', NULL, NULL, NULL),
+(95, 4, 'jay', 200, 20, 200, '5g Phone', 'mobuile', 1, '', '', NULL, NULL, NULL),
+(96, 4, 'jay', 200, 20, 200, '5g Phone', 'mobuile', 1, '', '', NULL, NULL, NULL),
+(97, 4, 'jay', 200, 20, 200, '5g Phone', 'mobuile', 1, '', '', NULL, NULL, NULL),
+(98, 4, 'jay', 200, 20, 200, '5g Phone', 'mobuile', 1, '', '', NULL, NULL, NULL),
+(99, 4, 'jay', 200, 20, 200, '5g Phone', 'mobuile', 1, '', '', NULL, NULL, NULL),
+(100, 4, 'jay', 200, 20, 200, '5g Phone', 'mobuile', 1, '', '', NULL, NULL, NULL),
+(101, 4, 'jay', 200, 20, 200, '5g Phone', 'mobuile', 1, '', '', NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -581,19 +654,19 @@ ALTER TABLE `customer_group`
 -- AUTO_INCREMENT for table `media`
 --
 ALTER TABLE `media`
-  MODIFY `mediaId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
+  MODIFY `mediaId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 
 --
 -- AUTO_INCREMENT for table `payment`
 --
 ALTER TABLE `payment`
-  MODIFY `methodId` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `methodId` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 
 --
 -- AUTO_INCREMENT for table `product`
 --
 ALTER TABLE `product`
-  MODIFY `productId` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=62;
+  MODIFY `productId` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=102;
 
 --
 -- AUTO_INCREMENT for table `product_customer_group_price`
