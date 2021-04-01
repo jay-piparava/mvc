@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 26, 2021 at 03:12 PM
+-- Generation Time: Apr 01, 2021 at 12:59 PM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.2.34
 
@@ -33,28 +33,26 @@ CREATE TABLE `address` (
   `address` varchar(500) NOT NULL,
   `city` varchar(255) NOT NULL,
   `state` varchar(255) NOT NULL,
-  `zipcode` int(255) NOT NULL,
+  `zipCode` int(255) NOT NULL,
   `country` varchar(255) NOT NULL,
-  `type` varchar(255) NOT NULL
+  `addressType` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `address`
 --
 
-INSERT INTO `address` (`addressId`, `customerId`, `address`, `city`, `state`, `zipcode`, `country`, `type`) VALUES
-(1, 1, 'billings', 'rajkots', 'rajkopys', 23000, 'Indias', 'billing'),
-(3, 2, 'vadodara', 'rajkot', 'gujarat', 2222222, 'india', 'billing'),
-(4, 2, 'surat', 'ahemdabad', 'gujarat', 30000, 'india', 'shipping'),
-(5, 3, 'shipping', 'ahemb=dabad', 'india', 2000, 'Australia', 'billing'),
-(6, 3, '', '', '', 0, '', 'shipping'),
-(7, 4, 'billing1', 'rajkot', 'rajkopy', 23000, 'India', 'billing'),
-(8, 4, 'rajkit1', 'rajkot', 'gujarat', 2222222, 'India', 'shipping'),
-(13, 1, 'abcd', '', '', 0, '', 'shipping'),
-(14, 14, 'Rajkots', 'rajkot', 'gujarat', 200000, 'india', 'billing'),
-(15, 14, 'Rajkot', 'Rajkot', 'Gujarat', 300000, 'india', 'shipping'),
-(16, 15, 'rajkot', 'rajkot', 'rajkot', 22222, 'rajkot', 'billing'),
-(17, 15, 'rajkots', 'rajkot', 'rajkot', 1234546, 'rajkot', 'shipping');
+INSERT INTO `address` (`addressId`, `customerId`, `address`, `city`, `state`, `zipCode`, `country`, `addressType`) VALUES
+(1, 1, 'Rajkot', 'rajkot', 'gujarat', 23000, 'india', 'billing'),
+(4, 1, 'Rajkot', 'rajkot', 'gujarat', 23000, 'india', 'shipping'),
+(5, 3, 'Junagadh', 'junagadh', 'gujarat', 23000, 'india', 'billing'),
+(6, 3, 'Junagadh1', 'mumbai', 'Maharastra', 2300, 'india', 'shipping'),
+(7, 4, 'Hathikhana', 'Rajkot', 'Gujarat', 20000, 'India', 'billing'),
+(8, 4, '', '', '', 0, '', 'shipping'),
+(9, 5, 'Ralnagar', 'Rajkot', 'Gujaraty', 36002, 'India', 'billing'),
+(10, 5, 'Ralnagar', 'Rajkot', 'Gujaraty', 36002, 'India', 'shipping'),
+(11, 6, 'Rajkot', 'rajkot', 'gujarat', 23000, 'india', 'billing'),
+(12, 6, 'Rajkot', 'rajkot', 'gujarat', 23000, 'india', 'shipping');
 
 -- --------------------------------------------------------
 
@@ -75,7 +73,10 @@ CREATE TABLE `admin` (
 --
 
 INSERT INTO `admin` (`adminId`, `userName`, `password`, `status`, `createdDate`) VALUES
-(3, 'jay', '111', 1, '2021-03-07 | 08:35:50');
+(28, 'hemal', '234', 0, ''),
+(29, 'hemal', '234', 1, ''),
+(31, 'hemal', '11111', 1, '2021-04-01 | 03:39:42'),
+(32, 'hemal11', '234', 1, '');
 
 -- --------------------------------------------------------
 
@@ -100,8 +101,7 @@ CREATE TABLE `attribute` (
 
 INSERT INTO `attribute` (`attributeId`, `entityTypeId`, `name`, `code`, `inputType`, `backendType`, `setOrder`, `backendModel`) VALUES
 (11, 'product', 'hello', '200', 'text', 'varchar(256)', '6', 'none'),
-(12, 'product', 'colors', '200', 'select', 'varchar(256)', '4', 'none'),
-(13, 'product', 'Hobby', '', 'checkbox', 'int(11)', '6', '');
+(12, 'product', 'colors', '200', 'select', 'varchar(256)', '4', 'none');
 
 -- --------------------------------------------------------
 
@@ -121,9 +121,10 @@ CREATE TABLE `attribute_option` (
 --
 
 INSERT INTO `attribute_option` (`optionId`, `name`, `attributeId`, `sortOrder`) VALUES
-(46, 'Red', 12, 1),
+(46, 'Red', 12, 4),
 (47, 'Green', 12, 2),
-(48, 'Yellow', 12, 3);
+(48, 'Yellow', 12, 3),
+(49, 'magento', 12, 1);
 
 -- --------------------------------------------------------
 
@@ -147,6 +148,105 @@ INSERT INTO `brand` (`brandId`, `bname`, `image`, `status`, `sortOrder`) VALUES
 (2, 'Raymond', '1616471595-1612-screen3.png', 0, 2),
 (3, 'Bata', '1616471632-7742-screen2.png', 0, 1),
 (4, 'Vimal', '1616471636-2246-screen5.png', 0, 3);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `cart`
+--
+
+CREATE TABLE `cart` (
+  `cartId` int(11) NOT NULL,
+  `sessionId` varchar(45) NOT NULL,
+  `customerId` int(11) NOT NULL,
+  `total` decimal(10,0) NOT NULL,
+  `discount` decimal(10,0) NOT NULL,
+  `paymentMethodId` int(11) NOT NULL,
+  `shippingMethodId` int(11) NOT NULL,
+  `shippingAmount` int(10) NOT NULL,
+  `grantTotal` decimal(10,0) DEFAULT NULL,
+  `createdDate` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `cart`
+--
+
+INSERT INTO `cart` (`cartId`, `sessionId`, `customerId`, `total`, `discount`, `paymentMethodId`, `shippingMethodId`, `shippingAmount`, `grantTotal`, `createdDate`) VALUES
+(1, '', 13, '0', '0', 0, 0, 0, NULL, 2021),
+(2, '', 1, '1260', '0', 43, 7, 100, '1360', 2021),
+(3, '', 3, '900', '0', 44, 9, 0, '900', 2021),
+(4, '', 4, '1434', '0', 43, 9, 0, '1434', 2021),
+(5, '', 2, '0', '0', 0, 0, 0, NULL, 2021),
+(6, '', 5, '900', '0', 0, 0, 0, '900', 2021),
+(7, '', 0, '0', '0', 0, 0, 0, NULL, 2021),
+(8, '', 6, '900', '0', 0, 7, 100, '1000', 2021);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `cartaddress`
+--
+
+CREATE TABLE `cartaddress` (
+  `cartAddressId` int(11) NOT NULL,
+  `cartId` int(11) NOT NULL,
+  `firstName` varchar(11) NOT NULL,
+  `lastName` varchar(11) NOT NULL,
+  `address` varchar(56) NOT NULL,
+  `city` varchar(11) NOT NULL,
+  `state` varchar(11) NOT NULL,
+  `country` varchar(11) NOT NULL,
+  `zipCode` int(11) NOT NULL,
+  `addressType` varchar(11) NOT NULL,
+  `sameAsBilling` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `cartaddress`
+--
+
+INSERT INTO `cartaddress` (`cartAddressId`, `cartId`, `firstName`, `lastName`, `address`, `city`, `state`, `country`, `zipCode`, `addressType`, `sameAsBilling`) VALUES
+(1, 2, 'jay', 'piparava', 'Rajkot', 'rajkot', 'gujarat', 'india', 23000, 'billing', 0),
+(2, 2, 'jay1', 'piparava', 'Rajkot', 'rajkot', 'gujarat', 'india', 23000, 'shipping', 0),
+(3, 3, 'Rohit', 'Lalwani', '', 'junagadh', 'gujarat', 'india', 23000, 'billing', 0),
+(4, 3, 'Rohit', 'Lalwani', '', 'mumbai', 'Maharastra', 'india', 2300, 'shipping', 0),
+(5, 4, 'Mahir', 'Patel', '', 'Rajkot', 'Gujarat', 'India', 20000, 'billing', 0),
+(6, 4, 'Mahir', 'Patel', '', 'Rajkot', 'Gujarat', 'India', 20000, 'shipping', 0),
+(7, 6, 'Mayur', 'Purusvani', 'Ralnagar', 'Rajkot', 'Gujaraty', 'India', 36002, 'billing', 0),
+(8, 6, 'Mayur', 'Purusvani', 'Ralnagar', 'Rajkot', 'Gujaraty', 'India', 36002, 'shipping', 0),
+(9, 8, 'jay', 'piparava', 'Rajkot', 'rajkot', 'gujarat', 'india', 23000, 'billing', 0),
+(10, 8, 'jay', 'piparava', 'Rajkot', 'rajkot', 'gujarat', 'india', 23000, 'shipping', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `cartitem`
+--
+
+CREATE TABLE `cartitem` (
+  `cartItemId` int(11) NOT NULL,
+  `cartId` int(11) NOT NULL,
+  `productId` int(11) NOT NULL,
+  `quantity` int(11) NOT NULL,
+  `basePrice` decimal(10,0) NOT NULL,
+  `discount` decimal(10,0) NOT NULL,
+  `createdDate` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `cartitem`
+--
+
+INSERT INTO `cartitem` (`cartItemId`, `cartId`, `productId`, `quantity`, `basePrice`, `discount`, `createdDate`) VALUES
+(1, 1, 57, 1, '200', '20', '2021-03-30 02:57:16'),
+(4, 3, 57, 5, '200', '20', '2021-03-30 04:03:58'),
+(5, 3, 62, 1, '200', '21', '2021-03-30 05:07:08'),
+(8, 4, 62, 6, '200', '21', '2021-03-30 05:17:08'),
+(10, 2, 57, 2, '200', '20', '2021-03-30 12:59:36'),
+(11, 2, 63, 5, '200', '20', '2021-03-30 12:59:54'),
+(12, 6, 57, 5, '200', '20', '2021-03-30 13:01:16'),
+(13, 8, 57, 5, '200', '20', '2021-03-31 08:55:23');
 
 -- --------------------------------------------------------
 
@@ -224,17 +324,12 @@ CREATE TABLE `customer` (
 --
 
 INSERT INTO `customer` (`customerId`, `groupId`, `firstName`, `lastName`, `email`, `mobile`, `password`, `status`, `createdAt`, `updatedAt`) VALUES
-(1, 14, 'jays', 'piparava1111', 'jaypiparava123@gmail.com', '8128211139', '413020463', 0, '2021-03-06 | 11:36:56', '2021-03-15 | 10:00:16'),
-(2, 14, 'jay', 'piparava', 'jaypiparava123@gmail.com', '8128211139', '42220364', 0, '2021-03-08 | 02:45:12', ''),
-(4, 14, 'jay', 'patel', 'jaypiparava123@gmail.coa', '8128211139', '459365506', 0, '2021-03-09 | 09:25:09', ''),
-(7, 14, 'aa', 'aa', 'jaypiparava@gmail.com', 'aa', '217748809', 0, '2021-03-15 | 09:13:12', ''),
-(11, 15, 'jay', 'piparava', 'jaypiparava123@gmail.com', '8128211139', '661450413', 0, '2021-03-15 | 09:34:34', ''),
-(12, 14, 'jay', 'piparava', 'jaypiparava123@gmail.com', '8128211139', '367184958', 0, '2021-03-15 | 09:34:39', ''),
-(13, 14, 'jay', 'piparava', 'jaypiparava123@gmail.com', '8128211139', '794990578', 0, '2021-03-15 | 09:35:01', ''),
-(14, 14, 'jay', 'piparava1111', 'jaypiparava@gmail.com', 'aa', '110859127', 1, '2021-03-15 | 12:16:56', '2021-03-18 | 12:11:27'),
-(15, 15, 'Heml', 'piparava', 'jaypiparava@gmail.com', 'aa', '39805226', 1, '2021-03-15 | 12:23:53', ''),
-(16, 14, 'jay111', 'ewgvr', 'jaypiparava@gmail.com', '1222', '234272677', 0, '2021-03-18 | 10:58:23', '2021-03-18 | 11:10:35'),
-(17, 14, 'jay', 'piparava1111', 'jaypiparava@gmail.com', '1222', '583633960', 1, '2021-03-18 | 11:10:38', '2021-03-18 | 11:56:56');
+(1, 1, 'Jay', 'Piparava', 'jaypiparava1123@gamil.com', '8128211139', '12345', 1, '', ''),
+(2, 1, 'Ronaks', 'rafadiya', 'jaypiparava@gmail.com', '8128211139', '1060300759', 1, '2021-03-30 | 12:41:50', '2021-03-30 | 12:41:56'),
+(3, 1, 'Rohit', 'Lalwani', 'jaypiparava@gmail.com', '8128211139', '787350391', 1, '2021-03-30 | 01:02:22', '2021-03-30 | 01:02:35'),
+(4, 1, 'Mahir', 'Patel', 'mahir@gmial.com', '9033028606', '197404214', 1, '2021-03-30 | 02:06:56', ''),
+(5, 1, 'Mayur', 'purusvani', 'mahir@gmial.com', '9033028606', '368605370', 1, '2021-03-30 | 10:01:03', ''),
+(6, 1, 'jauy', 'piparava', 'jaypiparava@gmail.com', '8128211139', '983398603', 1, '2021-03-31 | 05:55:00', '');
 
 -- --------------------------------------------------------
 
@@ -254,9 +349,7 @@ CREATE TABLE `customer_group` (
 --
 
 INSERT INTO `customer_group` (`groupId`, `name`, `default`, `createdAt`) VALUES
-(14, 'Regulars', 1, '2021-03-15 | 10:14:43'),
-(15, 'Wholsaler', 0, '2021-03-15 | 10:15:00'),
-(17, 'AAA', 1, '2021-03-18 | 11:57:26');
+(1, 'Retailer', 1, '');
 
 -- --------------------------------------------------------
 
@@ -310,40 +403,10 @@ CREATE TABLE `payment` (
 --
 
 INSERT INTO `payment` (`methodId`, `name`, `code`, `description`, `status`, `createdDate`, `updatedDate`) VALUES
-(5, 'hemal', '11111', '1111', 0, '2021-03-10 | 12:18:39', '2021-03-15 | 10:32:24'),
-(7, 'hemal', '200000', 'abcd', 0, '2021-03-15 | 10:34:37', ''),
-(10, 'jay', '2001', 'abcdef', 0, '2021-03-23 | 09:43:09', ''),
-(11, 'hemal', '44444', 'abcdef', 0, '2021-03-23 | 09:43:18', ''),
-(12, 'jay', '200', '5g Phone', 0, '', ''),
-(13, 'hemal', '200', '5g Phone', 1, '', ''),
-(14, 'jay', '200', '5g Phone', 1, '', ''),
-(15, 'hemal', '200', '5g Phone', 1, '', ''),
-(16, 'jay', '200', '5g Phone', 1, '', ''),
-(17, 'hemal', '200', '5g Phone', 1, '', ''),
-(18, 'jay', '200', '5g Phone', 1, '', ''),
-(19, 'hemal', '200', '5g Phone', 1, '', ''),
-(20, 'jay', '200', '5g Phone', 1, '', ''),
-(21, 'jay', '200', '5g Phone', 1, '', ''),
-(22, 'jay', '200', '5g Phone', 1, '', ''),
-(23, 'jay', '200', '5g Phone', 0, '', ''),
-(24, 'jay', '200', '5g Phone', 1, '', ''),
-(25, 'jay', '200', '5g Phone', 1, '', ''),
-(26, 'jay', '200', '5g Phone', 1, '', ''),
-(27, 'jay', '200', '5g Phone', 1, '', ''),
-(28, 'jay', '200', '5g Phone', 1, '', ''),
-(29, 'jay', '200', '5g Phone', 1, '', ''),
-(30, 'jay', '200', '5g Phone', 1, '', ''),
-(31, 'jay', '200', '5g Phone', 1, '', ''),
-(32, 'jay', '200', '5g Phone', 1, '', ''),
-(33, 'jay', '200', '5g Phone', 1, '', ''),
-(34, 'jay', '200', '5g Phone', 1, '', ''),
-(35, 'jay', '200', '5g Phone', 1, '', ''),
-(36, 'jay', '200', '5g Phone', 1, '', ''),
-(37, 'Hemal', '44444', 'abcd', 0, '2021-03-23 | 07:38:35', ''),
-(38, 'Hemal', '44444', 'abcd', 0, '2021-03-23 | 07:38:36', ''),
-(39, 'Hemal', '44444', 'abcd', 0, '2021-03-23 | 07:41:40', ''),
-(40, 'Hemal', '44444', 'abcd', 0, '2021-03-23 | 07:41:41', ''),
-(41, 'Hemal', '', 'abcdef', 0, '2021-03-23 | 07:42:27', '');
+(42, 'Credit Card', '1', 'Abcd', 1, '2021-03-30 | 12:20:56', ''),
+(43, 'Debit Card', '2', 'abcd', 1, '2021-03-30 | 12:21:12', ''),
+(44, 'PayPal', '3', 'abcd', 1, '2021-03-30 | 12:21:36', ''),
+(45, 'Cash On Delivery', '5', 'abcdef', 1, '2021-03-30 | 12:22:05', '');
 
 -- --------------------------------------------------------
 
@@ -364,59 +427,58 @@ CREATE TABLE `product` (
   `createdDate` varchar(50) NOT NULL,
   `updatedDate` varchar(50) NOT NULL,
   `hello` varchar(256) DEFAULT NULL,
-  `colors` varchar(256) DEFAULT NULL,
-  `Hobby` int(11) DEFAULT NULL
+  `colors` varchar(256) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `product`
 --
 
-INSERT INTO `product` (`productId`, `brandId`, `name`, `price`, `discount`, `quantity`, `description`, `sku`, `status`, `createdDate`, `updatedDate`, `hello`, `colors`, `Hobby`) VALUES
-(57, 2, 'Mobile', 201, 212, 2300, 'abcd1', '3ad7df3f9db8bd', 1, '2021-03-15 | 10:51:59', '2021-03-25 | 09:13:36', 'hii', 'Green', NULL),
-(58, 0, 'Mobile', 200, 2, 2300, 'abcd1', '991b2bab2f4bad', 0, '2021-03-16 | 08:58:38', '', '2', 'Green', NULL),
-(59, 0, 'Mobile', 200, 2, 2300, 'abcd1', '48fa1edb809830', 0, '2021-03-17 | 12:34:08', '2021-03-17 | 12:34:13', NULL, NULL, NULL),
-(60, 0, 'Mobile1', 2001, 21, 23001, 'abcd1', '56228701a69182', 1, '2021-03-17 | 05:05:49', '2021-03-18 | 12:56:44', NULL, NULL, NULL),
-(62, 4, 'Mobile', 200, 21, 2300, 'abcd1s11', '9f7e765333d5e8', 1, '2021-03-24 | 12:08:03', '', NULL, NULL, NULL),
-(63, 2, 'BUSKOT', 200, 20, 0, 'kOTAN NO', '4c0ecfc45400e6', 1, '2021-03-24 | 12:08:35', '', NULL, NULL, NULL),
-(64, 2, 'jay', 200, 20, 200, '5g Phone', 'mobuile', 1, '', '', NULL, NULL, NULL),
-(65, 2, 'jay', 200, 20, 200, '5g Phone', 'mobuile', 1, '', '', NULL, NULL, NULL),
-(66, 2, 'jay', 200, 20, 200, '5g Phone', 'mobuile', 1, '', '', NULL, NULL, NULL),
-(67, 2, 'jay', 200, 20, 200, '5g Phone', 'mobuile', 1, '', '', NULL, NULL, NULL),
-(68, 2, 'jay', 200, 20, 200, '5g Phone', 'mobuile', 1, '', '', NULL, NULL, NULL),
-(69, 2, 'jay', 200, 20, 200, '5g Phone', 'mobuile', 1, '', '', NULL, NULL, NULL),
-(70, 2, 'jay', 200, 20, 200, '5g Phone', 'mobuile', 1, '', '', NULL, NULL, NULL),
-(71, 2, 'jay', 200, 20, 200, '5g Phone', 'mobuile', 1, '', '', NULL, NULL, NULL),
-(72, 2, 'jay', 200, 20, 200, '5g Phone', 'mobuile', 1, '', '', NULL, NULL, NULL),
-(73, 2, 'jay', 200, 20, 200, '5g Phone', 'mobuile', 1, '', '', NULL, NULL, NULL),
-(74, 2, 'jay', 200, 20, 200, '5g Phone', 'mobuile', 1, '', '', NULL, NULL, NULL),
-(75, 2, 'jay', 200, 20, 200, '5g Phone', 'mobuile', 1, '', '', NULL, NULL, NULL),
-(76, 2, 'jay', 200, 20, 200, '5g Phone', 'mobuile', 1, '', '', NULL, NULL, NULL),
-(77, 3, 'jay', 200, 20, 200, '5g Phone', 'mobuile', 1, '', '', NULL, NULL, NULL),
-(78, 3, 'jay', 200, 20, 200, '5g Phone', 'mobuile', 1, '', '', NULL, NULL, NULL),
-(79, 3, 'jay', 200, 20, 200, '5g Phone', 'mobuile', 1, '', '', NULL, NULL, NULL),
-(80, 3, 'jay', 200, 20, 200, '5g Phone', 'mobuile', 1, '', '', NULL, NULL, NULL),
-(81, 3, 'jay', 200, 20, 200, '5g Phone', 'mobuile', 1, '', '', NULL, NULL, NULL),
-(82, 3, 'jay', 200, 20, 200, '5g Phone', 'mobuile', 1, '', '', NULL, NULL, NULL),
-(83, 3, 'jay', 200, 20, 200, '5g Phone', 'mobuile', 1, '', '', NULL, NULL, NULL),
-(84, 3, 'jay', 200, 20, 200, '5g Phone', 'mobuile', 1, '', '', NULL, NULL, NULL),
-(85, 3, 'jay', 200, 20, 200, '5g Phone', 'mobuile', 1, '', '', NULL, NULL, NULL),
-(86, 3, 'jay', 200, 20, 200, '5g Phone', 'mobuile', 1, '', '', NULL, NULL, NULL),
-(87, 3, 'jay', 200, 20, 200, '5g Phone', 'mobuile', 1, '', '', NULL, NULL, NULL),
-(88, 4, 'jay', 200, 20, 200, '5g Phone', 'mobuile', 1, '', '', NULL, NULL, NULL),
-(89, 4, 'jay', 200, 20, 200, '5g Phone', 'mobuile', 1, '', '', NULL, NULL, NULL),
-(90, 4, 'jay', 200, 20, 200, '5g Phone', 'mobuile', 1, '', '', NULL, NULL, NULL),
-(91, 4, 'jay', 200, 20, 200, '5g Phone', 'mobuile', 1, '', '', NULL, NULL, NULL),
-(92, 4, 'jay', 200, 20, 200, '5g Phone', 'mobuile', 1, '', '', NULL, NULL, NULL),
-(93, 4, 'jay', 200, 20, 200, '5g Phone', 'mobuile', 1, '', '', NULL, NULL, NULL),
-(94, 4, 'jay', 200, 20, 200, '5g Phone', 'mobuile', 1, '', '', NULL, NULL, NULL),
-(95, 4, 'jay', 200, 20, 200, '5g Phone', 'mobuile', 1, '', '', NULL, NULL, NULL),
-(96, 4, 'jay', 200, 20, 200, '5g Phone', 'mobuile', 1, '', '', NULL, NULL, NULL),
-(97, 4, 'jay', 200, 20, 200, '5g Phone', 'mobuile', 1, '', '', NULL, NULL, NULL),
-(98, 4, 'jay', 200, 20, 200, '5g Phone', 'mobuile', 1, '', '', NULL, NULL, NULL),
-(99, 4, 'jay', 200, 20, 200, '5g Phone', 'mobuile', 1, '', '', NULL, NULL, NULL),
-(100, 4, 'jay', 200, 20, 200, '5g Phone', 'mobuile', 1, '', '', NULL, NULL, NULL),
-(101, 4, 'jay', 200, 20, 200, '5g Phone', 'mobuile', 1, '', '', NULL, NULL, NULL);
+INSERT INTO `product` (`productId`, `brandId`, `name`, `price`, `discount`, `quantity`, `description`, `sku`, `status`, `createdDate`, `updatedDate`, `hello`, `colors`) VALUES
+(57, 2, 'Mobile', 200, 20, 2300, 'abcd1', '3ad7df3f9db8bd', 1, '2021-03-15 | 10:51:59', '2021-03-30 | 11:31:44', 'hii', 'magento'),
+(58, 0, 'Mobile', 200, 2, 2300, 'abcd1', '991b2bab2f4bad', 0, '2021-03-16 | 08:58:38', '', '2', 'Green'),
+(59, 0, 'Mobile', 200, 2, 2300, 'abcd1', '48fa1edb809830', 0, '2021-03-17 | 12:34:08', '2021-03-17 | 12:34:13', NULL, NULL),
+(60, 0, 'Mobile1', 2001, 21, 23001, 'abcd1', '56228701a69182', 1, '2021-03-17 | 05:05:49', '2021-03-18 | 12:56:44', NULL, NULL),
+(62, 4, 'Mobile', 200, 21, 2300, 'abcd1s11', '9f7e765333d5e8', 1, '2021-03-24 | 12:08:03', '', NULL, NULL),
+(63, 2, 'BUSKOT', 200, 20, 0, 'kOTAN NO', '4c0ecfc45400e6', 1, '2021-03-24 | 12:08:35', '', NULL, NULL),
+(64, 2, 'jay', 200, 20, 200, '5g Phone', 'mobuile', 1, '', '', NULL, NULL),
+(65, 2, 'jay', 200, 20, 200, '5g Phone', 'mobuile', 1, '', '', NULL, NULL),
+(66, 2, 'jay', 200, 20, 200, '5g Phone', 'mobuile', 1, '', '', NULL, NULL),
+(67, 2, 'jay', 200, 20, 200, '5g Phone', 'mobuile', 1, '', '', NULL, NULL),
+(68, 2, 'jay', 200, 20, 200, '5g Phone', 'mobuile', 1, '', '', NULL, NULL),
+(69, 2, 'jay', 200, 20, 200, '5g Phone', 'mobuile', 1, '', '', NULL, NULL),
+(70, 2, 'jay', 200, 20, 200, '5g Phone', 'mobuile', 1, '', '', NULL, NULL),
+(71, 2, 'jay', 200, 20, 200, '5g Phone', 'mobuile', 1, '', '', NULL, NULL),
+(72, 2, 'jay', 200, 20, 200, '5g Phone', 'mobuile', 1, '', '', NULL, NULL),
+(73, 2, 'jay', 200, 20, 200, '5g Phone', 'mobuile', 1, '', '', NULL, NULL),
+(74, 2, 'jay', 200, 20, 200, '5g Phone', 'mobuile', 1, '', '', NULL, NULL),
+(75, 2, 'jay', 200, 20, 200, '5g Phone', 'mobuile', 1, '', '', NULL, NULL),
+(76, 2, 'jay', 200, 20, 200, '5g Phone', 'mobuile', 1, '', '', NULL, NULL),
+(77, 3, 'jay', 200, 20, 200, '5g Phone', 'mobuile', 1, '', '', NULL, NULL),
+(78, 3, 'jay', 200, 20, 200, '5g Phone', 'mobuile', 1, '', '', NULL, NULL),
+(79, 3, 'jay', 200, 20, 200, '5g Phone', 'mobuile', 1, '', '', NULL, NULL),
+(80, 3, 'jay', 200, 20, 200, '5g Phone', 'mobuile', 1, '', '', NULL, NULL),
+(81, 3, 'jay', 200, 20, 200, '5g Phone', 'mobuile', 1, '', '', NULL, NULL),
+(82, 3, 'jay', 200, 20, 200, '5g Phone', 'mobuile', 1, '', '', NULL, NULL),
+(83, 3, 'jay', 200, 20, 200, '5g Phone', 'mobuile', 1, '', '', NULL, NULL),
+(84, 3, 'jay', 200, 20, 200, '5g Phone', 'mobuile', 1, '', '', NULL, NULL),
+(85, 3, 'jay', 200, 20, 200, '5g Phone', 'mobuile', 1, '', '', NULL, NULL),
+(86, 3, 'jay', 200, 20, 200, '5g Phone', 'mobuile', 1, '', '', NULL, NULL),
+(87, 3, 'jay', 200, 20, 200, '5g Phone', 'mobuile', 1, '', '', NULL, NULL),
+(88, 4, 'jay', 200, 20, 200, '5g Phone', 'mobuile', 1, '', '', NULL, NULL),
+(89, 4, 'jay', 200, 20, 200, '5g Phone', 'mobuile', 1, '', '', NULL, NULL),
+(90, 4, 'jay', 200, 20, 200, '5g Phone', 'mobuile', 1, '', '', NULL, NULL),
+(91, 4, 'jay', 200, 20, 200, '5g Phone', 'mobuile', 1, '', '', NULL, NULL),
+(92, 4, 'jay', 200, 20, 200, '5g Phone', 'mobuile', 1, '', '', NULL, NULL),
+(93, 4, 'jay', 200, 20, 200, '5g Phone', 'mobuile', 1, '', '', NULL, NULL),
+(94, 4, 'jay', 200, 20, 200, '5g Phone', 'mobuile', 1, '', '', NULL, NULL),
+(95, 4, 'jay', 200, 20, 200, '5g Phone', 'mobuile', 1, '', '', NULL, NULL),
+(96, 4, 'jay', 200, 20, 200, '5g Phone', 'mobuile', 1, '', '', NULL, NULL),
+(97, 4, 'jay', 200, 20, 200, '5g Phone', 'mobuile', 1, '', '', NULL, NULL),
+(98, 4, 'jay', 200, 20, 200, '5g Phone', 'mobuile', 1, '', '', NULL, NULL),
+(99, 4, 'jay', 200, 20, 200, '5g Phone', 'mobuile', 1, '', '', NULL, NULL),
+(100, 4, 'jay', 200, 20, 200, '5g Phone', 'mobuile', 1, '', '', NULL, NULL),
+(101, 4, 'jay', 200, 20, 200, '5g Phone', 'mobuile', 1, '', '', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -500,7 +562,9 @@ CREATE TABLE `shiping` (
 --
 
 INSERT INTO `shiping` (`methodId`, `name`, `code`, `amount`, `discription`, `status`, `createdDate`, `updatedDate`) VALUES
-(4, 'jayssss', '200sss', 5000, 'abcdss', 0, '2021-03-15 | 10:41:57', '2021-03-15 | 10:45:22');
+(7, 'Express  - 1 day', '1', 100, 'aabcvs', 1, '2021-03-30 | 12:22:37', '2021-03-30 | 12:23:45'),
+(8, 'Platinium - 3days', '2', 50, 'zbcd', 1, '2021-03-30 | 12:23:00', '2021-03-30 | 12:23:56'),
+(9, 'Free Delivery - 7 days', '3', 0, 'abcdss', 1, '2021-03-30 | 12:23:35', '2021-03-30 | 12:52:13');
 
 --
 -- Indexes for dumped tables
@@ -536,6 +600,24 @@ ALTER TABLE `attribute_option`
 --
 ALTER TABLE `brand`
   ADD PRIMARY KEY (`brandId`);
+
+--
+-- Indexes for table `cart`
+--
+ALTER TABLE `cart`
+  ADD PRIMARY KEY (`cartId`);
+
+--
+-- Indexes for table `cartaddress`
+--
+ALTER TABLE `cartaddress`
+  ADD PRIMARY KEY (`cartAddressId`);
+
+--
+-- Indexes for table `cartitem`
+--
+ALTER TABLE `cartitem`
+  ADD PRIMARY KEY (`cartItemId`);
 
 --
 -- Indexes for table `category`
@@ -600,13 +682,13 @@ ALTER TABLE `shiping`
 -- AUTO_INCREMENT for table `address`
 --
 ALTER TABLE `address`
-  MODIFY `addressId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `addressId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `admin`
 --
 ALTER TABLE `admin`
-  MODIFY `adminId` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `adminId` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- AUTO_INCREMENT for table `attribute`
@@ -618,13 +700,31 @@ ALTER TABLE `attribute`
 -- AUTO_INCREMENT for table `attribute_option`
 --
 ALTER TABLE `attribute_option`
-  MODIFY `optionId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
+  MODIFY `optionId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
 
 --
 -- AUTO_INCREMENT for table `brand`
 --
 ALTER TABLE `brand`
   MODIFY `brandId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `cart`
+--
+ALTER TABLE `cart`
+  MODIFY `cartId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT for table `cartaddress`
+--
+ALTER TABLE `cartaddress`
+  MODIFY `cartAddressId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- AUTO_INCREMENT for table `cartitem`
+--
+ALTER TABLE `cartitem`
+  MODIFY `cartItemId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `category`
@@ -642,13 +742,13 @@ ALTER TABLE `cms_page`
 -- AUTO_INCREMENT for table `customer`
 --
 ALTER TABLE `customer`
-  MODIFY `customerId` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `customerId` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `customer_group`
 --
 ALTER TABLE `customer_group`
-  MODIFY `groupId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `groupId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `media`
@@ -660,7 +760,7 @@ ALTER TABLE `media`
 -- AUTO_INCREMENT for table `payment`
 --
 ALTER TABLE `payment`
-  MODIFY `methodId` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
+  MODIFY `methodId` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
 
 --
 -- AUTO_INCREMENT for table `product`
@@ -678,7 +778,7 @@ ALTER TABLE `product_customer_group_price`
 -- AUTO_INCREMENT for table `shiping`
 --
 ALTER TABLE `shiping`
-  MODIFY `methodId` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `methodId` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- Constraints for dumped tables
