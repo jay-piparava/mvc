@@ -23,7 +23,7 @@
     </div>
     <div class="form-group col-md-6">
         <label for="name">Zip Code</label>
-        <input type="number" name="billing[zipcode]" class="form-control" placeholder="Zip Code" value="<?php echo $billing->zipcode; ?>">
+        <input type="number" name="billing[zipCode]" class="form-control" placeholder="Zip Code" value="<?php echo $billing->zipCode; ?>">
     </div>
 </div>
 <div class="form-row">
@@ -33,7 +33,7 @@
     </div>
     <div class="form-group col-md-6">
         <label for="name">Address Type</label>
-        <input type="text" name="billing[type]" class="form-control" readonly placeholder="Address Type" value="billing">
+        <input type="text" name="billing[addressType]" class="form-control" readonly placeholder="Address Type" value="billing">
     </div>
 </div>
 
@@ -59,7 +59,7 @@
     </div>
     <div class="form-group col-md-6">
         <label for="name">Zip Code</label>
-        <input type="number" name="shipping[zipcode]" class="form-control" placeholder="Zip Code" value="<?php echo $shipping->zipcode; ?>">
+        <input type="number" name="shipping[zipCode]" class="form-control" placeholder="Zip Code" value="<?php echo $shipping->zipCode; ?>">
     </div>
 </div>
 <div class="form-row">
@@ -69,7 +69,7 @@
     </div>
     <div class="form-group col-md-6">
         <label for="name">Address Type</label>
-        <input type="text" name="shipping[type]" class="form-control" placeholder="Address Type" readonly value="shipping">
+        <input type="text" name="shipping[addressType]" class="form-control" placeholder="Address Type" readonly value="shipping">
     </div>
 </div>
 <button type="button" class="btn btn-lg btn-warning" onclick="setAction(this); object.resetParams().setForm('#form').load();">Save</button>

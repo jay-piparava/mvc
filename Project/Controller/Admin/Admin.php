@@ -1,7 +1,6 @@
 <?php
 namespace Controller\Admin;
 
-
 date_default_timezone_set('Asia/Calcutta');
 /**
  * class for insert update and delete
@@ -39,7 +38,8 @@ class Admin extends \Controller\Core\Admin
             $admin->load($id);
         }
         $contentForm->setTableRow($admin);
-
+        // print_r($contentForm);
+        // die;
         $response = [
             'element' => [
                 [

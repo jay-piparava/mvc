@@ -135,16 +135,6 @@ class Grid extends \Block\Core\Grid
             'placeholder' => 'Quantity',
             'class' => 'clear',
         ]);
-
-        // $this->addfilter('discount', [
-        //     'inputType' => "<input type='text'style='width:70px' name='filter[product][discount]' placeholder='Discount'>",
-        // ]);
-        // $this->addfilter('Quantity', [
-        //     'inputType' => "<input type='text' style='width:70px' name='filter[product][quantity]' placeholder='Quantity'>",
-        // ]);
-        // $this->addfilter('sku', [
-        //     'inputType' => "<input type='text' style='width:70px' name='filter[product][sku]' placeholder='Sku'>",
-        // ]);
     }
     public function getFilters()
     {
@@ -209,6 +199,12 @@ class Grid extends \Block\Core\Grid
 
     public function prepareAction()
     {
+        $this->addAction('cart', [
+            'method' => 'getCartUrl',
+            'label' => 'Add To Cart',
+            'ajax' => true,
+            'class' => 'btn btn-primary',
+        ]);
         $this->addAction('edit', [
             'method' => 'getEditUrl',
             'label' => 'Edit',
@@ -237,6 +233,13 @@ class Grid extends \Block\Core\Grid
             return "{$this->getUrl()->getUrl('edit', 'Admin_Product', ['id' => $row->productId])}";
         }
         return "object.setUrl('{$this->getUrl()->getUrl('form', 'Admin_Product', ['id' => $row->productId])}').resetParams().load()";
+    }
+    public function getCartUrl($row, $ajax)
+    {
+        if (!$ajax) {
+            return "{$this->getUrl()->getUrl('addToCart', 'Admin_Cart', ['id' => $row->productId])}";
+        }
+        return "object.setUrl('{$this->getUrl()->getUrl('addToCart', 'Admin_Cart', ['id' => $row->productId])}').resetParams().load()";
     }
 
     public function getDeleteUrl($row, $ajax)

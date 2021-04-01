@@ -21,7 +21,7 @@ class Address extends \Block\Core\Edit
         }
         $billing = \Mage::getModel('Model\Customer\Address');
         if ($id = $this->getTableRow()->customerId) {
-            $query = "SELECT * FROM `address` WHERE `customerId` = $id AND type = 'billing'";
+            $query = "SELECT * FROM `address` WHERE `customerId` = $id AND `addressType` = 'billing'";
             $row = $billing->load(null, $query);
             $this->billing = $row;
         }
@@ -43,7 +43,7 @@ class Address extends \Block\Core\Edit
         }
         $shipping = \Mage::getModel('Model\Customer\Address');
         if ($id = $this->getRequest()->getGet('id')) {
-            $query = "SELECT * FROM `address` WHERE `customerId` = $id AND type = 'shipping'";
+            $query = "SELECT * FROM `address` WHERE `customerId` = $id AND `addressType` = 'shipping'";
             $row = $shipping->load(null, $query);
             $this->shipping = $row;
         }

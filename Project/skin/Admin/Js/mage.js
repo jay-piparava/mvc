@@ -2,11 +2,11 @@ var Base = function () {
 
 };
 Base.prototype = {
-	url : null,
-	params : {},
-	method : 'post',
+	url: null,
+	params: {},
+	method: 'post',
 
-	setUrl : function (url) {
+	setUrl: function (url) {
 		this.url = url;
 		return this;
 	},
@@ -20,7 +20,7 @@ Base.prototype = {
 	getMethod: function () {
 		return this.method;
 	},
-	resetParams : function() {
+	resetParams: function () {
 		this.params = {};
 		return this;
 	},
@@ -29,37 +29,37 @@ Base.prototype = {
 		return this;
 	},
 	getParams: function (key) {
-		if(typeof key === 'undefined') {
-		return this.params;
+		if (typeof key === 'undefined') {
+			return this.params;
 		}
-		if(typeof this.params[key] == 'undefined') {
-		return null;
+		if (typeof this.params[key] == 'undefined') {
+			return null;
 		}
 		return this.params[key];
 	},
 	addParams: function (key, value) {
 		this.params[key] = value;
 		return this;
-		},
-		removeParams: function (key) {
+	},
+	removeParams: function (key) {
 		if (typeof this.params[key] != 'undefined') {
-		delete this.params[key];
+			delete this.params[key];
 		}
 		return this;
 	},
 	setForm: function (form) {
 		this.setMethod($(form).attr('method'));
-		// alert($(form).attr('action'));
-        this.setUrl($(form).attr('action'));
-        this.setParams($(form).serializeArray());
-        return this;
-    },
-	load : function() {
+		this.setUrl($(form).attr('action'));
+		this.setParams($(form).serializeArray());
+		return this;
+	},
+	load: function () {
+		// console.log(this.params);
 		var request = $.ajax({
-			method : this.getMethod(),
-			url : this.getUrl(),
-			data : this.getParams(),
-			success : function(response){
+			method: this.getMethod(),
+			url: this.getUrl(),
+			data: this.getParams(),
+			success: function (response) {
 				$.each(response.element, function (i, element) {
 					$(element.selector).html(element.html);
 					//alert(element.selector+' '+element.html);

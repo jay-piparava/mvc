@@ -4,6 +4,7 @@
   <title>E-Commerce</title>
 </head>
 <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <script type="text/javascript" src="js/jquery.js"></script>
 <script src="<?php echo $this->baseUrl("skin/Admin/ckeditor.js"); ?>"></script>
 <script src="<?php echo $this->baseUrl("skin/Admin/sample.js"); ?>"></script>
@@ -19,7 +20,7 @@
        <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav ml-auto">
           	<li class="nav-item active">
-          	   	<a class="nav-link" href="http://localhost/Project?c=Admin_home&a=home">Home</a>
+          	   	<a class="nav-link" href="http://localhost/Project">Home</a>
           	</li>
            	<li class="nav-item active">
              		 <a class="nav-link" href="javascript:void(0)" onclick="object.setUrl('<?php echo $this->getUrl()->getUrl('gridHtml', 'Admin_Product', ['page' => 1], true) ?>').resetParams().load();">Product</a>
@@ -50,6 +51,9 @@
               </li>
               <li class="nav-item active">
                 <a class="nav-link" href="javascript:void(0)" onclick="object.setUrl('<?php echo $this->getUrl()->getUrl('gridHtml', 'Admin_Brand', [], true); ?>').resetParams().load();" >Brand</a>
+              </li>
+              <li class="nav-item active">
+                <a class="nav-link" href="javascript:void(0)" onclick="object.setUrl('<?php echo $this->getUrl()->getUrl('gridHtml', 'Admin_Cart', [], true); ?>').resetParams().load();" >Cart</a>
               </li>
           </ul>
         </div>
